@@ -62,15 +62,14 @@ let repeatedAction = cc.repeatForever(sequence);
 this.node.getChildByName("shipSprite").runAction(repeatedAction);
     },
     changeRotation(){
+        cc.log("rotation");
         this.isHorizontal=!this.isHorizontal;
         if(this.isHorizontal){
             this.node.rotation=0;
         }else{
             this.node.rotation=90;
         }
-        cc.log("rotation");
         this.calculatePosition(this.positions[this.anchorIndex].x, this.positions[this.anchorIndex].y);
-        Emitter.instance.emit('setShipId', { positions: this.positions, shipId: this.shipId });
     }
 });
 module.exports=Ship;
