@@ -63,8 +63,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -473.412,
-      "y": 19.522,
+      "x": -520.819,
+      "y": 14.255,
       "z": 0
     },
     "_scale": {
@@ -93,7 +93,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [
       {
@@ -260,7 +260,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [
       {
@@ -700,7 +700,7 @@
     "node": {
       "__id__": 20
     },
-    "_enabled": true,
+    "_enabled": false,
     "_materials": [
       {
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
@@ -802,8 +802,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -180.217,
-      "y": -364.621,
+      "x": 460.143,
+      "y": -312.132,
       "z": 0
     },
     "_scale": {
@@ -1125,12 +1125,11 @@
     "mapEnemy": {
       "__id__": 2
     },
-    "mapPlayer": {
-      "__id__": 8
-    },
+    "mapPlayer": null,
     "changeSceneNode": {
       "__id__": 14
     },
+    "piravte": null,
     "_id": ""
   },
   {

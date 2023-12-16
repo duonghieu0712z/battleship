@@ -18,7 +18,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        Emitter.instance.registerEvent(EVENT_NAME.CHECK_POSITION,this.sendResult)
+       // Emitter.instance.registerEvent(EVENT_NAME.CHECK_POSITION,this.sendResult)
     },
     sendResult(data){
         const sendObject = {

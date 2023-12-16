@@ -1,4 +1,6 @@
 const Emitter = require('EventEmitter');
+const EVENT_NAME = require("NAME_EVENT")
+
 cc.Class({
     extends: cc.Component,
 
@@ -15,7 +17,7 @@ cc.Class({
 
     },
     loadTheShip(){
-        const allChildren = this.node.getChildren();
+        const allChildren = this.node.children[0].getChildren();
         this.ships = [];
         allChildren.forEach(child => {
             if (child.name === "ship") {
@@ -25,6 +27,7 @@ cc.Class({
         if(this.ships.length<4){
             cc.log("Vui lòng chọn đủ tàu")
         }else{
+            Emitter.instance.emit("START",this.playerId);
             Emitter.instance.emit('SavePlayerId',this.playerId);
             this.shipBool.active=false;
             this.turnOffDraDrop();
@@ -55,15 +58,15 @@ cc.Class({
     responeResult(data){
         if(data.shipId==null){
             cc.log("hut");
-            Emitter.instance.emit('sendResult',{isHit:false,worldPosition:data.worldPosition});
+            Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:false,worldPosition:data.worldPosition});
         }else{
             let length=this.updateLength(data.shipId);
             if(length==0){
                 cc.log("no");
-                Emitter.instance.emit('sendResult',{isHit:true,worldPosition:data.worldPosition,shipLength:length});
+                Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:true,worldPosition:data.worldPosition,shipLength:length});
             }else{
                 cc.log("trung");
-                Emitter.instance.emit('sendResult',{isHit:true,worldPosition:data.worldPosition,shipLength:length});
+                Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:true,worldPosition:data.worldPosition,shipLength:length});
             }
         }
       
@@ -80,7 +83,7 @@ cc.Class({
         return Math.floor(Math.random() * Date.now()).toString();
     },
     registerEvent(){
-        Emitter.instance.registerEvent("checkposition", this.checkPositon.bind(this));
+        Emitter.instance.registerEvent(EVENT_NAME.CHECK_POSITION, this.checkPositon.bind(this));
         Emitter.instance.registerEvent("receiveresult", this.responeResult.bind(this));
     }
 });
