@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "7a96f17f-0b58-4e9d-879d-bdfbfad68aeb",
+  "uuid": "dfb0bab2-06f9-40da-99b1-b68ca3c73020",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,8 +11,8 @@
   "subMetas": {
     "zyro-image_02": {
       "ver": "1.0.4",
-      "uuid": "5a137060-2814-4c14-943c-b7143559cb36",
-      "rawTextureUuid": "7a96f17f-0b58-4e9d-879d-bdfbfad68aeb",
+      "uuid": "cea6fbdf-64f9-4fce-b0b1-4bb3faf763f4",
+      "rawTextureUuid": "dfb0bab2-06f9-40da-99b1-b68ca3c73020",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

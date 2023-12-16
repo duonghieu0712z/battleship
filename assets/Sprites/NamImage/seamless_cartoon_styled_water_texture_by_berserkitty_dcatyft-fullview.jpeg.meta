@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "846f1ccc-65b1-4529-92b2-ad2ea573dbaa",
+  "uuid": "64a6f29b-910f-4d82-8bbf-a846be043555",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,8 +11,8 @@
   "subMetas": {
     "seamless_cartoon_styled_water_texture_by_berserkitty_dcatyft-fullview": {
       "ver": "1.0.4",
-      "uuid": "fdad0582-bcc4-4ce4-b194-b5073652c3b2",
-      "rawTextureUuid": "846f1ccc-65b1-4529-92b2-ad2ea573dbaa",
+      "uuid": "e505d791-4346-40c9-a1bf-e13a2a4a0393",
+      "rawTextureUuid": "64a6f29b-910f-4d82-8bbf-a846be043555",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
