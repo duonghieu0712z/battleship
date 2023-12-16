@@ -1,32 +1,22 @@
-// Learn cc.Class:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
+var percent = {
+    value: 0,
+}
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+
+        loginScene: cc.Node,
+        loadingScene: cc.Node,
+        loadingWaves: cc.Node,
+
+        yStart: 40,
+
+        yEnd: 280,
+
+        speed: 100,
+
+        percentLabel: cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -34,8 +24,41 @@ cc.Class({
     // onLoad () {},
 
     start () {
-
+        this.loginScene.active = true;
+        this.loadingScene.active = false;
     },
 
-    // update (dt) {},
+    update (dt) {
+        this.setPercentLabel(Math.floor(percent.value));
+    },
+
+    setPercentLabel(percent){
+        this.percentLabel.string = percent+`%`;
+    },
+
+    loading(){
+        this.loginScene.active = false;
+        this.loadingScene.active = true;
+
+        var percentY = (this.yEnd - this.yStart)/100;
+
+        cc.tween(percent)
+        .delay(0.5)
+        .to(0.5, { value: 20 })
+        .delay(0.5)
+        .to(0.4, { value: 30 })
+        .delay(0.4)
+        .to(0.3, { value: 60 })
+        .delay(0.3)
+        .to(0.3, { value: 65 })
+        .delay(0.3)
+        .to(0.2, { value: 90 })
+        .delay(0.2)
+        .to(1, { value: 100 })
+        .start()
+
+         cc.tween(this.loadingWaves)
+        .to(5.2, { y: this.yEnd })
+        .start()
+    }
 });
