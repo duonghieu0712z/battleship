@@ -6,7 +6,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        _isHit: false,
+        _isHitting: false,
         _hitPos: [],
         _saveHitPos: [],
 
@@ -23,7 +23,7 @@ cc.Class({
     chooseCoordinates() {
         let position = null;
         do {
-            if (!this._isHit) {
+            if (!this._isHitting) {
                 position = randomPosition(this._maxRow, this._maxColumn);
             } else {
                 position = randomAroundPositions(
@@ -43,13 +43,13 @@ cc.Class({
     },
 
     hitShip(position) {
-        this._isHit = true;
+        this._isHitting = true;
         this._hitPos.push(position);
         this._saveHitPos.push(position);
     },
 
     onCompleteHitShip() {
-        this._isHit = false;
+        this._isHitting = false;
         this._hitPos = [];
     },
 });
