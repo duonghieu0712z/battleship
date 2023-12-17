@@ -56,22 +56,25 @@ cc.Class({
         return ship.length;
     },
     responeResult(data){
-        if(data.shipId==null){
-            cc.log("hut");
-            Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:false,worldPosition:data.worldPosition});
-        }else{
-            let length=this.updateLength(data.shipId);
-            if(length==0){
-                cc.log("no");
-                Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:true,worldPosition:data.worldPosition,shipLength:length});
+        if(this.playerId==data.playerId){
+            if(data.shipId==null){
+                cc.log("hut");
+                Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:false,worldPosition:data.worldPosition});
             }else{
-                cc.log("trung");
-                Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:true,worldPosition:data.worldPosition,shipLength:length});
+                let length=this.updateLength(data.shipId);
+                if(length==0){
+                    cc.log("no");
+                    Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:true,worldPosition:data.worldPosition,shipLength:length});
+                }else{
+                    cc.log("trung");
+                    Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:true,worldPosition:data.worldPosition,shipLength:length});
+                }
             }
         }
-      
     },
     sendCoordinates(data){
+        cc.log({playerId:this.playerId,position:data});
+        Emitter.instance.emit("POSITION",{playerId:this.playerId,position:data});
     },
     checkPositon(data){
         cc.log(data);
@@ -85,5 +88,6 @@ cc.Class({
     registerEvent(){
         Emitter.instance.registerEvent(EVENT_NAME.CHECK_POSITION, this.checkPositon.bind(this));
         Emitter.instance.registerEvent("receiveresult", this.responeResult.bind(this));
+        Emitter.instance.registerEvent("sendCoordinates", this.sendCoordinates.bind(this));
     }
 });

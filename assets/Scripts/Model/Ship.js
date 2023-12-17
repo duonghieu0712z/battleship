@@ -27,7 +27,7 @@ let Ship=cc.Class({
             this.positions.push(new position(0,0));
         }
     },
-    calculatePosition(x,y){
+    calculatePosition(x,y,isPlayer){
         this.positions[this.anchorIndex].x=x;
         this.positions[this.anchorIndex].y=y;
         if(this.isHorizontal){
@@ -49,7 +49,9 @@ let Ship=cc.Class({
                 this.positions[i].y=y+(i-this.anchorIndex);
             }
         }
-        Emitter.instance.emit('selected', {positions:this.positions,shipId:this.shipId});
+        if(isPlayer){
+            Emitter.instance.emit('selected', {positions:this.positions,shipId:this.shipId});
+        }
     },
     generateRandomId() {
         return Math.floor(Math.random() * Date.now()).toString();
@@ -69,7 +71,7 @@ this.node.getChildByName("shipSprite").runAction(repeatedAction);
         }else{
             this.node.rotation=90;
         }
-        this.calculatePosition(this.positions[this.anchorIndex].x, this.positions[this.anchorIndex].y);
+        this.calculatePosition(this.positions[this.anchorIndex].x, this.positions[this.anchorIndex].y,true);
     }
 });
 module.exports=Ship;
