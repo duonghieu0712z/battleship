@@ -70,8 +70,8 @@ cc.Class({
     },
     onChangePlayerScene() {
         cc.log("chuyen player");
-        //this.mapPlayer.active = false;
-        //this.mapEnemy.active = true
+        this.mapPlayer.active = false;
+        this.mapEnemy.active = true
 
     },
     onChangeEnemyScene() {
@@ -85,16 +85,20 @@ cc.Class({
         Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
             cc.log(data)
             data.playerId = this.playerId;
+            Emitter.instance.emit(EVENT_NAME.STOP_CLOCK)
             Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
         })
+        Emitter.instance.emit(EVENT_NAME.COLD_DOWN_CLOCK)
     },
     onEnterPlayerScene() {
         cc.log("hello player ");
         //bug
         Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
             data.playerId = this.enemyId;
+            Emitter.instance.emit(EVENT_NAME.STOP_CLOCK)
             Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
         })
+        Emitter.instance.emit(EVENT_NAME.COLD_DOWN_CLOCK)
     },
     playAnimation(data) {
         cc.log('send result: ' + data)

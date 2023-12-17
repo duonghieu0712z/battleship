@@ -106,6 +106,11 @@ cc.Class({
         let targetPosition = new cc.Vec2(mapcotainerPosition.x+this.node.parent.parent.x,mapcotainerPosition.y+this.node.parent.parent.y);
         let shipId=node.getComponent("Tile").shipId;
         Emitter.instance.emit('receiveresult',{playerId:this.playerId,worldPosition:targetPosition,shipId:shipId});
+        cc.tween(this.node)
+        .delay(3)
+        .call(()=>{
+            node.getComponent("Tile").changeState();
+        }).start()
        }
     }, 
     savePlayerId(data){

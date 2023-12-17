@@ -37,6 +37,7 @@ cc.Class({
     },
 
     onTouchEnd(event) {
+        cc.log("co nhan");
         let touchPosGlobal = event.getLocation();
         let touchPosLocal = this.node.convertToNodeSpaceAR(touchPosGlobal);
         this.convertPosition(touchPosLocal);
@@ -57,13 +58,14 @@ cc.Class({
     },
 
     test() {
-        for (let i = 0; i < 4; i++) {
-            let a = new Ship(4, true);
-            let x = this.getRandomIntegerInRange(0, 8);
-            let y = this.getRandomIntegerInRange(0, 8);
-            a.calculatePosition(x, y, false);
-            this.setShip({ arrayPos: a.positions, shipId: a.shipId });
-        }
+        // for (let i = 0; i < 4; i++) {
+        //     let a = new Ship(4, true);
+        //     let x=this.getRandomIntegerInRange(0,8);
+        //     let y=this.getRandomIntegerInRange(0,8);
+        //     a.calculatePosition(x, y,false);
+        //     this.setShip({arrayPos:a.positions,shipId:a.shipId});
+        // }
+        this.node.active = !this.node.active;
     },
 
     getRandomIntegerInRange(minValue, maxValue) {
@@ -129,6 +131,12 @@ cc.Class({
                 worldPosition: targetPosition,
                 shipId: shipId,
             });
+            cc.tween(this.node)
+                .delay(3)
+                .call(() => {
+                    node.getComponent("Tile").changeState();
+                })
+                .start();
         }
     },
 });
