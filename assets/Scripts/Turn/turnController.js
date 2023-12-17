@@ -44,6 +44,7 @@ cc.Class({
             cc.moveTo(0.5, 850, 0),
             cc.callFunc(()=>{
                 this.resetPosition();
+                Emitter.instance.emit('UI-yourTurnDone');
             })
         )
         this.yourTurnPanel.runAction(action);
@@ -56,6 +57,7 @@ cc.Class({
             cc.moveTo(0.5, -850, 0),
             cc.callFunc(()=>{
                 this.resetPosition();
+                Emitter.instance.emit('UI-enemyTurnDone');
             })
         )
         this.enemyTurnPanel.runAction(action);
@@ -79,6 +81,7 @@ cc.Class({
             cc.callFunc(()=>{
                 this.circleLoading.rotation = 0;
                 this.circleLoading.parent.active = false;
+                Emitter.instance.emit('UI-waitForEnemyDone')
             })
         )
         this.circleLoading.runAction(action);
