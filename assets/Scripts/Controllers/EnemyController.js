@@ -16,8 +16,10 @@ cc.Class({
 
     onLoad() {
         const onCompleteHitShip = this.onCompleteHitShip.bind(this);
+        const onHitShip = this.onHitShip.bind(this);
 
-        Emitter.instance.registerEvent("hit-ship", onCompleteHitShip);
+        Emitter.instance.registerEvent("complete-hit-ship", onCompleteHitShip);
+        Emitter.instance.registerEvent("hit-ship", onHitShip);
     },
 
     chooseCoordinates() {
@@ -29,11 +31,11 @@ cc.Class({
                 position = randomAroundPositions(
                     this._hitPos,
                     this._maxRow,
-                    this._maxColumn
+                    this._maxColumn,
                 );
             }
         } while (this.hasHitShip(position));
-        this.hitShip(position);
+        this._saveHitPos.push(position);
 
         // Emitter.instance.emit("position", position);
     },
@@ -42,10 +44,9 @@ cc.Class({
         return this._saveHitPos.includes(position);
     },
 
-    hitShip(position) {
+    onHitShip(position) {
         this._isHitting = true;
         this._hitPos.push(position);
-        this._saveHitPos.push(position);
     },
 
     onCompleteHitShip() {
