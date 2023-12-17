@@ -19,6 +19,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        cc.log(this.node.parent)
         Emitter.instance.registerOnce("attackToPosition", this.onAttack.bind(this));
     },
     start() {

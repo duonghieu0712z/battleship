@@ -1,4 +1,3 @@
-const Ship = require('Ship');
 const Emitter = require('EventEmitter');
 cc.Class({
     extends: cc.Component,

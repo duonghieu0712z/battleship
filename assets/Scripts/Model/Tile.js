@@ -5,13 +5,8 @@ cc.Class({
         cover:cc.Node,
         activeColor:cc.Color,
         effect:[cc.Prefab],
-        shipId:null
-    },
-    onLoad(){
-
-    },
-    start () {
-
+        shipId:null,
+        isShooted:false
     },
     active(isSelected){
         if(isSelected){
@@ -29,5 +24,14 @@ cc.Class({
             effect=cc.instantiate(this.effect[1]);
         }
         effect.parent=this.node;
+    },
+    changeState(){
+        if(this.shipId==null){
+            this.cover.active=true;
+            this.cover.color=this.activeColor=cc.color(80, 80, 80, 180);
+        }else{
+            this.cover.active=true;
+            this.cover.color=this.activeColor=cc.color(255, 0, 0, 180);
+        }
     }
 });
