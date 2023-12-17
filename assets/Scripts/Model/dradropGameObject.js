@@ -74,7 +74,7 @@ cc.Class({
         let stepX = Math.round(posX / 55);
         let stepY = Math.round(posY / 55);
         let newPos = new cc.Vec2(stepX * 55, stepY * 55);
-        this.node.getComponent("Ship").calculatePosition(stepX, stepY * -1);
+        this.node.getComponent("Ship").calculatePosition(stepX, stepY * -1,true);
         this.convertPos = new cc.Vec2(newPos.x + this.map.x + 30, newPos.y + this.map.y - 30);
     },
     setAvailable(data) {

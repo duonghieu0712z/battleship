@@ -9,6 +9,7 @@ const eventName= {
     CHECK_POSITION:"CHECK_POSITION",
     PLAY_ANI:"PLAY_ANI",
     DESTROY_ANI_NODE:"DESTROY_ANI_NODE",
-    SHIP_FAIL:"SHIP_FAIL"
+    SHIP_FAIL:"SHIP_FAIL",
+    START:"START"
 }
 module.exports = eventName;

@@ -19,13 +19,16 @@ cc.Class({
         mapEnemy: cc.Node,
         mapPlayer: cc.Node,
         changeSceneNode: cc.Node,
+        piravte:sp.Skeleton
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        cc.log(Emitter)
         this.playerId = 0;
         this.enemyId = 1;
+        Emitter.instance.registerOnce(EVENT_NAME.START,this.setPlayerIdStartGame.bind(this))
         Emitter.instance.registerEvent(EVENT_NAME.CHANGE_SCENE, this.changeScene.bind(this))
         Emitter.instance.registerEvent(EVENT_NAME.SEND_RESULT, this.playAnimation.bind(this))
         Emitter.instance.registerEvent(EVENT_NAME.RESET_TURN, this.restTurn.bind(this))
@@ -47,12 +50,28 @@ cc.Class({
                 OnChangeShipFailScene: this.changeSceneShipFail.bind(this)
             }
         });
-        this.fsm.changePlayerScene();
+        //this.fsm.changePlayerScene();
+    },
+    setPlayerIdStartGame(data){
+        this.playerId = data;
+        cc.log(this.playerId);
+        this.piravte.node.active= true;
+        this.fsm.changeEnemyScene();
+        cc.tween(this.node)
+            .delay(5)
+            .call(()=>{
+                const object = {
+                    playerId:0,
+                    position:{x:0,y:0}
+                }
+                cc.log('twwen');
+                Emitter.instance.emit(EVENT_NAME.POSITION,object)
+            }).start()
     },
     onChangePlayerScene() {
         cc.log("chuyen player");
-        this.mapPlayer.active = false;
-        this.mapEnemy.active = true
+        //this.mapPlayer.active = false;
+        //this.mapEnemy.active = true
 
     },
     onChangeEnemyScene() {
@@ -64,6 +83,7 @@ cc.Class({
         cc.log("hello enemy");
         //bug
         Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
+            cc.log(data)
             data.playerId = this.playerId;
             Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
         })
@@ -78,8 +98,9 @@ cc.Class({
     },
     playAnimation(data) {
         cc.log('send result: ' + data)
+        const currentScene = cc.director.getScene();
         let cannonBall = cc.instantiate(this.ballCannon);
-        cannonBall.setParent(this.node.parent.parent);
+        cannonBall.setParent(currentScene);
         cannonBall.position = cc.v2(450, 100);
         Emitter.instance.emit("attackToPosition", data)
     },
