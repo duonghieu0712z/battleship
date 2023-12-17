@@ -22,6 +22,7 @@ cc.Class({
         this.map[0][0].getComponent("Tile").isShooted = true;
     },
     onTouchEnd(event) {
+        cc.log("co nhan");
         let touchPosGlobal = event.getLocation();
         let touchPosLocal = this.node.convertToNodeSpaceAR(touchPosGlobal);
         this.convertPosition(touchPosLocal);
@@ -40,13 +41,15 @@ cc.Class({
         }
     },
     test() {
-        for (let i = 0; i < 4; i++) {
-            let a = new Ship(4, true);
-            let x=this.getRandomIntegerInRange(0,8);
-            let y=this.getRandomIntegerInRange(0,8);
-            a.calculatePosition(x, y,false);
-            this.setShip({arrayPos:a.positions,shipId:a.shipId});
-        }
+        // for (let i = 0; i < 4; i++) {
+        //     let a = new Ship(4, true);
+        //     let x=this.getRandomIntegerInRange(0,8);
+        //     let y=this.getRandomIntegerInRange(0,8);
+        //     a.calculatePosition(x, y,false);
+        //     this.setShip({arrayPos:a.positions,shipId:a.shipId});
+        // }
+        this.node.active=!this.node.active;
+
     },
     getRandomIntegerInRange(minValue, maxValue) {
         return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
@@ -92,6 +95,11 @@ cc.Class({
             let targetPosition = new cc.Vec2(mapcotainerPosition.x + this.node.parent.parent.x, mapcotainerPosition.y + this.node.parent.parent.y);
             let shipId = node.getComponent("Tile").shipId;
             Emitter.instance.emit('receiveresult', { playerId: this.enemyId, worldPosition: targetPosition, shipId: shipId });
+            cc.tween(this.node)
+            .delay(3)
+            .call(()=>{
+                node.getComponent("Tile").changeState();
+            }).start()
         }
     },
 });
