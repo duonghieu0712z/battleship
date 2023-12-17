@@ -41,7 +41,7 @@ cc.Class({
         ).repeat(11).start()
     },
     stopClock(){
-        this.coldDown.stop()
+        // this.coldDown.stop()
     },
     start() {
 

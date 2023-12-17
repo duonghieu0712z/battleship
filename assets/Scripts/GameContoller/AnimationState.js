@@ -23,7 +23,7 @@ cc.Class({
         // Bắt đầu chạy Animation
     },
     onAnimationFinished() {
-        cc.log("xong no hieu ung")
+        // cc.log("xong no hieu ung")
         Emitter.instance.emit(EVENT_NAME.DESTROY_ANI_NODE)
     },
     start() {

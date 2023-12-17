@@ -18,6 +18,11 @@ cc.Class({
 
         // const onRandomShips = this.onRandomShips.bind(this);
         // Emitter.instance.registerOnce("random-enemy-ship", onRandomShips);
+
+        Emitter.instance.registerEvent(
+            "updateLength",
+            this.updateLength.bind(this),
+        );
     },
 
     start() {
@@ -43,5 +48,19 @@ cc.Class({
             data.shipId = ship.shipId;
             Emitter.instance.emit("set-enemy-ship-pos", data);
         } while (!data.isSuccess);
+    },
+
+    getShipById(shipId) {
+        for (let index = 0; index < this.shipPool.length; index++) {
+            if (this.shipPool[index].shipId == shipId) {
+                return this.shipPool[index];
+            }
+        }
+    },
+
+    updateLength(shipId, out) {
+        let ship = this.getShipById(shipId);
+        ship.length -= 1;
+        out.length = ship.length;
     },
 });

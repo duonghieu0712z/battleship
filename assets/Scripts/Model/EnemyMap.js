@@ -21,6 +21,13 @@ cc.Class({
         const onSetEnemyShipPos = this.setShip.bind(this);
         Emitter.instance.registerEvent("set-enemy-ship-pos", onSetEnemyShipPos);
 
+        Emitter.instance.registerEvent("checkTile", this.checkTile.bind(this));
+
+        Emitter.instance.registerEvent(
+            "setEnemyId",
+            (enemyId) => (this.enemyId = enemyId),
+        );
+
         Emitter.instance.registerEvent("log-enemy-map", () =>
             cc.log(
                 "random ship",
@@ -33,7 +40,7 @@ cc.Class({
 
     start() {
         this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-        this.map[0][0].getComponent("Tile").isShooted = true;
+        // this.map[0][0].getComponent("Tile").isShooted = true;
     },
 
     onTouchEnd(event) {
@@ -126,11 +133,13 @@ cc.Class({
                 mapcotainerPosition.y + this.node.parent.parent.y,
             );
             let shipId = node.getComponent("Tile").shipId;
+            cc.log("enemy ship", shipId);
             Emitter.instance.emit("receiveresult", {
                 playerId: this.enemyId,
                 worldPosition: targetPosition,
                 shipId: shipId,
             });
+            node.getComponent("Tile").isShooted = true;
             cc.tween(this.node)
                 .delay(3)
                 .call(() => {

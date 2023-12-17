@@ -99,13 +99,15 @@ cc.Class({
         })
     },
     checkTile(data){
+        cc.log('in player', this.playerId, data.playerId)
        if(this.playerId==data.playerId){
+        cc.log('check tile player', data)
         let node=this.map[data.position.y][data.position.x];
         let mapPosition = new cc.Vec2(node.x+this.node.x,node.y+this.node.y);
         let mapcotainerPosition = new cc.Vec2(mapPosition.x+this.node.parent.x,mapPosition.y+this.node.parent.y);
         let targetPosition = new cc.Vec2(mapcotainerPosition.x+this.node.parent.parent.x,mapcotainerPosition.y+this.node.parent.parent.y);
         let shipId=node.getComponent("Tile").shipId;
-        Emitter.instance.emit('receiveresult',{playerId:this.playerId,worldPosition:targetPosition,shipId:shipId});
+        Emitter.instance.emit('receiveresult',{playerId:this.playerId,worldPosition:targetPosition,shipId:shipId,position:data.position});
         cc.tween(this.node)
         .delay(3)
         .call(()=>{
@@ -114,6 +116,7 @@ cc.Class({
        }
     }, 
     savePlayerId(data){
+        cc.log('save player id')
         this.playerId=data;
     }
 });
