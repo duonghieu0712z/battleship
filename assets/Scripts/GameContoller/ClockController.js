@@ -19,11 +19,29 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        Emitter.instance.registerEvent(EVENT_NAME.COLD_DOWN_CLOCK, this.coldDown.bind(this))
+        this.coldDown;
+        Emitter.instance.registerEvent(EVENT_NAME.COLD_DOWN_CLOCK, this.coldDown.bind(this))    
+        Emitter.instance.registerEvent(EVENT_NAME.STOP_CLOCK, this.stopClock.bind(this))       
+   
     },
     coldDown() {
-        this.coldDownTime--;
-        this.node.getChildByName("Label").getComponent(cc.Label).string = this.coldDownTime;
+        this.coldDownTime =10;
+        this.coldDown = cc.tween(this.node)
+        .sequence(cc.tween().call(()=>{
+            cc.log(this.coldDownTime)
+            this.node.getComponent(cc.Label).string = this.coldDownTime;
+            this.coldDownTime--;
+        },),
+        cc.tween().delay(1),
+        cc.tween().call(()=>{
+            if(this.coldDownTime===0)       
+                     Emitter.instance.emit(EVENT_NAME.CHANGE_SCENE, true)
+
+        })
+        ).repeat(11).start()
+    },
+    stopClock(){
+        this.coldDown.stop()
     },
     start() {
 
