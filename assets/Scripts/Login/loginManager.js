@@ -43,21 +43,30 @@ cc.Class({
         var percentY = (this.yEnd - this.yStart) / 100;
 
         cc.tween(percent)
-            .delay(0.5)
-            .to(0.5, {value: 20})
-            .delay(0.5)
-            .to(0.4, {value: 30})
-            .delay(0.4)
-            .to(0.3, {value: 60})
-            .delay(0.3)
-            .to(0.3, {value: 65})
-            .delay(0.3)
-            .to(0.2, {value: 90})
-            .delay(0.2)
-            .to(1, {value: 100})
-            .start()
-        cc.tween(this.loadingWaves)
-            .to(5.2, {y: this.yEnd})
-            .start()
+        .delay(0.5)
+        .to(0.5, { value: 20 })
+        .delay(0.5)
+        .to(0.4, { value: 30 })
+        .delay(0.4)
+        .to(0.3, { value: 60 })
+        .delay(0.3)
+        .to(0.3, { value: 65 })
+        .delay(0.3)
+        .to(0.2, { value: 90 })
+        .delay(0.2)
+        .to(1, { value: 100 })
+        .delay(1)
+        .call(()=>{
+            this.loadMainScene();
+        })
+        .start()
+
+         cc.tween(this.loadingWaves)
+        .to(5.2, { y: this.yEnd })
+        .start()
+    },
+
+    loadMainScene(){
+        cc.director.loadScene("mainScene");
     }
 });
