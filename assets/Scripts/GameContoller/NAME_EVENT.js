@@ -27,6 +27,9 @@ const eventName = {
     SOUND_SHOOT_WATER: 'SOUND_SHOOT_WATER',
     SOUND_EXPLOSION: 'SOUND_EXPLOSION',
 
+    WIN: 'WIN',
+    LOSE: 'LOSE',
+
 
 };
 module.exports = eventName;
