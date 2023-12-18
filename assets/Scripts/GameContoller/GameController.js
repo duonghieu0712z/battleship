@@ -119,7 +119,7 @@ cc.Class({
                     Emitter.instance.emit(EVENT_NAME.CHOOSE_COORDINATES)
                     let spine =this.pirate.node.getComponent(sp.Skeleton)
                     spine.clearTracks()
-                    spine.setAnimation(0,"Attack_1",false)
+                    spine.setAnimation(0,"Attack_2",false)
                     spine.addAnimation(0,"Idle",true)
                 }).start()
         })
