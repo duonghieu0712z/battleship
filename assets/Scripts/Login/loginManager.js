@@ -55,12 +55,7 @@ cc.Class({
             .to(0.2, {value: 90})
             .delay(0.2)
             .to(1, {value: 100})
-            .delay(1)
-            .call(()=>{
-                cc.director.loadScene("mainScene")
-            })
             .start()
-
         cc.tween(this.loadingWaves)
             .to(5.2, {y: this.yEnd})
             .start()
