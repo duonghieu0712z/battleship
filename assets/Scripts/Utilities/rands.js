@@ -48,7 +48,7 @@ const randomAroundPos = (position, maxRow, maxColumn) => {
     do {
         const offset = randomInArray(offsets);
         newPos = addPosition(position, offset);
-    } while (!checkPosition(position, maxRow, maxColumn));
+    } while (!checkPosition(newPos, maxRow, maxColumn));
 
     return newPos;
 };
@@ -92,9 +92,15 @@ const randomAroundPositions = (positions, maxRow, maxColumn) => {
     );
 };
 
+const randomHitShip = (hitShips, maxRow, maxColumn) => {
+    const shipId = randomInArray(Object.keys(hitShips));
+    const shipPos = hitShips[shipId];
+    return randomAroundPositions(shipPos, maxRow, maxColumn);
+};
+
 module.exports = {
     random,
     randomInArray,
     randomPosition,
-    randomAroundPositions,
+    randomHitShip,
 };

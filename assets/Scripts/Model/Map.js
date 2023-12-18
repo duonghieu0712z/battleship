@@ -99,9 +99,7 @@ cc.Class({
         })
     },
     checkTile(data){
-        cc.log('in player', this.playerId, data.playerId)
        if(this.playerId==data.playerId){
-        cc.log('check tile player', data)
         let node=this.map[data.position.y][data.position.x];
         let mapPosition = new cc.Vec2(node.x+this.node.x,node.y+this.node.y);
         let mapcotainerPosition = new cc.Vec2(mapPosition.x+this.node.parent.x,mapPosition.y+this.node.parent.y);
