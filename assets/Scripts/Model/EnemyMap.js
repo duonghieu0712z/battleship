@@ -92,13 +92,27 @@ cc.Class({
     setShip(data) {
         data.isSuccess = this.checkAvailable(data.arrayPos);
         if (data.isSuccess) {
+            this.addToShipBool(data);
             for (let i = 0; i < data.arrayPos.length; i++) {
                 let tile = this.map[data.arrayPos[i].y][data.arrayPos[i].x];
-                tile.getComponent("Tile").shipId = data.shipId;
+                tile.getComponent("Tile").shipId = data.shipId; 
             }
         }
     },
-
+    addToShipBool(data){
+        let anchorIndex=Math.floor(data.arrayPos.length/2);
+        let stepX=data.arrayPos[anchorIndex].x;
+        let stepY=data.arrayPos[anchorIndex].y+1;
+        let position=new cc.Vec2(stepX*55+25,stepY*-55+25);
+        cc.log(position);
+        let isHorizontal=true;
+        if(data.arrayPos.length!=1){
+            if(data.arrayPos[anchorIndex].y!=data.arrayPos[anchorIndex-1].y){
+                isHorizontal=false;
+            }
+        }
+        Emitter.instance.emit("addShipBool", { shipId:data.shipId,length:data.arrayPos.length,position:position,isHorizontal:isHorizontal});
+    },
     checkAvailable(arrayPos) {
         for (let i = 0; i < arrayPos.length; i++) {
             if (
