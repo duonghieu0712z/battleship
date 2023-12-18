@@ -13,39 +13,38 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        coldDownTime: 10,
+        coldDownTime: 11,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad() {
-        this.coldDown;
-        Emitter.instance.registerEvent(EVENT_NAME.COLD_DOWN_CLOCK, this.coldDown.bind(this))    
-        Emitter.instance.registerEvent(EVENT_NAME.STOP_CLOCK, this.stopClock.bind(this))       
-   
+/*    onLoad() {
+        this.coldDownAction = cc.tween(this.node)
+            .sequence(cc.tween().call(() => {
+                    cc.log(this.coldDownTime)
+                    this.coldDownTime--;
+                    this.node.getComponent(cc.Label).string = this.coldDownTime;
+                },),
+                cc.tween().delay(1),
+            ).repeat(11)
+            .call(() => {
+                if (this.coldDownTime === 0){
+                    //Emitter.instance.emit(EVENT_NAME.CHANGE_SCENE_CLOCK)
+                      //  Emitter.instance.emit(EVENT_NAME.CHANGE_SCENE_CLOCK)
+                }
+            });
     },
-    coldDown() {
-        this.coldDownTime =10;
-        this.coldDown = cc.tween(this.node)
-        .sequence(cc.tween().call(()=>{
-            cc.log(this.coldDownTime)
-            this.node.getComponent(cc.Label).string = this.coldDownTime;
-            this.coldDownTime--;
-        },),
-        cc.tween().delay(1),
-        cc.tween().call(()=>{
-            if(this.coldDownTime===0)       
-                     Emitter.instance.emit(EVENT_NAME.CHANGE_SCENE, true)
+    onEnable() {
+        this.coldDownTime = 11;
+        this.coldDownAction.start();
+    },
+    stopClock() {
+        this.coldDownAction.stop();
+    },
 
-        })
-        ).repeat(11).start()
-    },
-    stopClock(){
-        // this.coldDown.stop()
-    },
     start() {
 
-    },
+    },*/
 
     // update (dt) {},
 });
