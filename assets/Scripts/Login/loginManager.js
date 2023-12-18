@@ -23,42 +23,46 @@ cc.Class({
 
     // onLoad () {},
 
-    start () {
+    start() {
         this.loginScene.active = true;
         this.loadingScene.active = false;
     },
 
-    update (dt) {
+    update(dt) {
         this.setPercentLabel(Math.floor(percent.value));
     },
 
-    setPercentLabel(percent){
-        this.percentLabel.string = percent+`%`;
+    setPercentLabel(percent) {
+        this.percentLabel.string = percent + `%`;
     },
 
-    loading(){
+    loading() {
         this.loginScene.active = false;
         this.loadingScene.active = true;
 
-        var percentY = (this.yEnd - this.yStart)/100;
+        var percentY = (this.yEnd - this.yStart) / 100;
 
         cc.tween(percent)
-        .delay(0.5)
-        .to(0.5, { value: 20 })
-        .delay(0.5)
-        .to(0.4, { value: 30 })
-        .delay(0.4)
-        .to(0.3, { value: 60 })
-        .delay(0.3)
-        .to(0.3, { value: 65 })
-        .delay(0.3)
-        .to(0.2, { value: 90 })
-        .delay(0.2)
-        .to(1, { value: 100 })
-        .start()
+            .delay(0.5)
+            .to(0.5, {value: 20})
+            .delay(0.5)
+            .to(0.4, {value: 30})
+            .delay(0.4)
+            .to(0.3, {value: 60})
+            .delay(0.3)
+            .to(0.3, {value: 65})
+            .delay(0.3)
+            .to(0.2, {value: 90})
+            .delay(0.2)
+            .to(1, {value: 100})
+            .delay(1)
+            .call(()=>{
+                cc.director.loadScene("mainScene")
+            })
+            .start()
 
-         cc.tween(this.loadingWaves)
-        .to(5.2, { y: this.yEnd })
-        .start()
+        cc.tween(this.loadingWaves)
+            .to(5.2, {y: this.yEnd})
+            .start()
     }
 });
