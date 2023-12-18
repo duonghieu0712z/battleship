@@ -159,7 +159,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 461.59154021710583
+      "z": 465.05564183224357
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -312,7 +312,7 @@
         "__id__": 10
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [],
     "_prefab": null,
@@ -601,8 +601,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 313.22,
-      "height": 32.5
+      "width": 296.22,
+      "height": 44.44
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -612,7 +612,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 6.194,
-      "y": 8.618,
+      "y": 2.71,
       "z": 0
     },
     "_scale": {
@@ -647,13 +647,13 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "siingle player",
-    "_N$string": "siingle player",
-    "_fontSize": 13,
+    "_string": "SINGLER PLAYER",
+    "_N$string": "SINGLER PLAYER",
+    "_fontSize": 40,
     "_lineHeight": 80,
     "_enableWrapText": false,
     "_N$file": {
-      "__uuid__": "70fbe2be-a58b-4b78-9704-3b22104e4430"
+      "__uuid__": "17384ba9-843a-46a4-8ef4-88f7400ec76f"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
@@ -833,7 +833,7 @@
         "__id__": 48
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [],
     "_prefab": null,
@@ -1932,8 +1932,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 133.59,
-      "height": 18.75
+      "width": 94.38,
+      "height": 25
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1942,7 +1942,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 10.349,
+      "x": 11.798,
       "y": 46.569,
       "z": 0
     },
@@ -1980,11 +1980,11 @@
     "_useOriginalSize": false,
     "_string": "100%",
     "_N$string": "100%",
-    "_fontSize": 15,
+    "_fontSize": 45,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "70fbe2be-a58b-4b78-9704-3b22104e4430"
+      "__uuid__": "17384ba9-843a-46a4-8ef4-88f7400ec76f"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,

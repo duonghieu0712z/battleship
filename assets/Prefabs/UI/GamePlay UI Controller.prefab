@@ -28,7 +28,7 @@
       }
     ],
     "_active": true,
-    "_level": 2,
+    "_level": 1,
     "_components": [
       {
         "__id__": 20
@@ -179,7 +179,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "f2vnOIuGVM4r7olOHc3aEL",
+    "fileId": "723ivLrqtJ7r7ZFRN6avu1",
     "sync": false
   },
   {
@@ -282,7 +282,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "efQ1m2XOdA06jpE1N48PoC",
+    "fileId": "14s8xaLrtBpY0vO66eNP8g",
     "sync": false
   },
   {
@@ -455,7 +455,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "259tFnC5dBpZH9AyUwEfSh",
+    "fileId": "c62dV/gmdBHrvK/jmPq8if",
     "sync": false
   },
   {
@@ -558,7 +558,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "66A9Dy0etHXqTRNvYiRJl3",
+    "fileId": "efS73gD1JHk4yl1oi7Q/Cd",
     "sync": false
   },
   {
@@ -589,8 +589,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 214.12,
-      "height": 90.39999999999999
+      "width": 206.12,
+      "height": 83.33
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -635,13 +635,15 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "Wait Enemy",
-    "_N$string": "Wait Enemy",
-    "_fontSize": 40,
-    "_lineHeight": 40,
+    "_string": "WAITING ENEMY",
+    "_N$string": "WAITING ENEMY",
+    "_fontSize": 30,
+    "_lineHeight": 100,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "17384ba9-843a-46a4-8ef4-88f7400ec76f"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 1,
@@ -659,7 +661,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "6dEnf1SetEOLAxEDW4LeAO",
+    "fileId": "b4uNo3xMJB+qGVmSp1HD1k",
     "sync": false
   },
   {
@@ -700,7 +702,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "b95MjacM1Na5aOU2Qm9mzq",
+    "fileId": "deHQDr2Z9HKbJM1qa3/h8s",
     "sync": false
   },
   {
@@ -735,7 +737,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "d4x6K1QvRGcb7JqGUXYH9i",
+    "fileId": "6drYZCRdtBD69ZHWTuIzI/",
     "sync": false
   }
 ]

@@ -1,4 +1,5 @@
 const Emitter = require("EventEmitter");
+const EVENT_NAME = require("NAME_EVENT");
 cc.Class({
     extends: cc.Component,
 
@@ -17,16 +18,17 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
-
-    start () {
+    onLoad () {
         this.circleLoading.parent.active = false;
         var _yourTurn = this.yourTurn.bind(this);
         var _enemyTurn = this.enemyTurn.bind(this);
         var _waitForEnemy = this.waitForEnemy.bind(this);
-        Emitter.instance.registerEvent("UI-yourTurn", _yourTurn);
-        Emitter.instance.registerEvent("UI-enemyTurn", _enemyTurn);
-        Emitter.instance.registerEvent("UI-waitForEnemy", _waitForEnemy);
+        Emitter.instance.registerEvent(EVENT_NAME.YOUR_TURN_PANEL, _yourTurn);
+        Emitter.instance.registerEvent(EVENT_NAME.ENEMY_TURN_PANEL, _enemyTurn);
+        Emitter.instance.registerEvent(EVENT_NAME.WAIT_FOR_ENEMY, _waitForEnemy);
+    },
+
+    start () {
         this.resetPosition();
     },
 
@@ -44,7 +46,7 @@ cc.Class({
             cc.moveTo(0.5, 850, 0),
             cc.callFunc(()=>{
                 this.resetPosition();
-                Emitter.instance.emit('UI-yourTurnDone');
+                Emitter.instance.emit(EVENT_NAME.YOUR_TURN_PANEL_DONE);
             })
         )
         this.yourTurnPanel.runAction(action);
@@ -57,7 +59,7 @@ cc.Class({
             cc.moveTo(0.5, -850, 0),
             cc.callFunc(()=>{
                 this.resetPosition();
-                Emitter.instance.emit('UI-enemyTurnDone');
+                Emitter.instance.emit(EVENT_NAME.ENEMY_TURN_PANEL_DONE);
             })
         )
         this.enemyTurnPanel.runAction(action);
@@ -69,19 +71,19 @@ cc.Class({
             cc.spawn(
                 cc.rotateTo(3, 180),
                 cc.callFunc(()=>{
-                    this.loadingLabel.string = 'Waiting Enemy';
+                    this.loadingLabel.string = 'WAITING ENEMY';
                 })
             ),
             cc.spawn(
                 cc.delayTime(1),
                 cc.callFunc(()=>{
-                    this.loadingLabel.string = 'Start';
+                    this.loadingLabel.string = 'START';
                 })
             ),
             cc.callFunc(()=>{
                 this.circleLoading.rotation = 0;
                 this.circleLoading.parent.active = false;
-                Emitter.instance.emit('UI-waitForEnemyDone')
+                Emitter.instance.emit(EVENT_NAME.WAIT_FOR_ENEMY_DONE)
             })
         )
         this.circleLoading.runAction(action);
