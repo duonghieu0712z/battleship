@@ -158,20 +158,26 @@ cc.Class({
             this._shipEnemyCounter--;
             cc.log(this.__shipEnemyCounter)
             if (this._shipEnemyCounter === 0) {
-                this.onChangeEndScene("YOUR WINS")
+                this.onChangeEndScene(true)
             } else {
                 this.fsm.changePlayerScene()
             }
         } else if (this.fsm.state === 'enemyScene') {
             this._shipPlayerCounter--;
             if (this._shipPlayerCounter === 0) {
-                this.onChangeEndScene("YOUR LOSE CHICKEN")
+                this.onChangeEndScene(false)
             } else {
                 this.fsm.changeEnemyScene()
             }
         }
     },
     onChangeEndScene(data) {
-        cc.log(data)
+        let win = true;
+        if(win === data){
+            Emitter.instance.emit(EVENT_NAME.WIN)
+        }
+        else {
+            Emitter.instance.emit(EVENT_NAME.LOSE)
+        }
     },
 });

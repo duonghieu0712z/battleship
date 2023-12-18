@@ -31,6 +31,10 @@ cc.Class({
     ship.getComponent("EnemyShipDisplay").displayShip(false);
    },
    showShip(data){
-    this.shipBool[data.shipId].getComponent("EnemyShipDisplay").displayShip(true);
+       cc.tween(this.node)
+           .delay(3)
+           .call(()=>{
+               this.shipBool[data.shipId].getComponent("EnemyShipDisplay").displayShip(true);
+           }).start()
    }
 });

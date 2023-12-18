@@ -45,7 +45,7 @@ cc.Class({
     },
 
     onTouchMove(event) {
-        cc.log("dra");
+        // cc.log("dra");
         if (!this.isDragging) return;
         const worldPos = this.node.parent.convertToNodeSpaceAR(event.getLocation());
         this.node.position = worldPos.add(this.offset);
@@ -79,10 +79,10 @@ cc.Class({
     },
     setAvailable(data) {
         if (this.node.getComponent("Ship").shipId == data.shipId) {
-            cc.log("data",data);
-            cc.log("isdraging",this.isDragging);
+            // cc.log("data",data);
+            // cc.log("isdraging",this.isDragging);
             this.isAvailable = data.isAvailable;
-            cc.log("isdouble click",this.isDoubleClick);
+            // cc.log("isdouble click",this.isDoubleClick);
             if(this.isDoubleClick){
                 this.endTochAction();
                 this.isDoubleClick=false;
