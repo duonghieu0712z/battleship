@@ -23,24 +23,24 @@ cc.Class({
 
     // onLoad () {},
 
-    start () {
+    start() {
         this.loginScene.active = true;
         this.loadingScene.active = false;
     },
 
-    update (dt) {
+    update(dt) {
         this.setPercentLabel(Math.floor(percent.value));
     },
 
-    setPercentLabel(percent){
-        this.percentLabel.string = percent+`%`;
+    setPercentLabel(percent) {
+        this.percentLabel.string = percent + `%`;
     },
 
-    loading(){
+    loading() {
         this.loginScene.active = false;
         this.loadingScene.active = true;
 
-        var percentY = (this.yEnd - this.yStart)/100;
+        var percentY = (this.yEnd - this.yStart) / 100;
 
         cc.tween(percent)
         .delay(0.5)
