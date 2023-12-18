@@ -21,6 +21,10 @@ const eventName = {
     WAIT_FOR_ENEMY: 'UI-waitForEnemy',
     WAIT_FOR_ENEMY_DONE: 'UI-waitForEnemyDone',
 
+    SOUND_CANON_SHOOT: 'SOUND_CANON_SHOOT',
+    SOUND_SHOOT_WATER: 'SOUND_SHOOT_WATER',
+    SOUND_EXPLOSION: 'SOUND_EXPLOSION',
+
 
 };
 module.exports = eventName;
