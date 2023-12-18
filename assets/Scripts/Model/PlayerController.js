@@ -27,8 +27,8 @@ cc.Class({
         if(this.ships.length<4){
             cc.log("Vui lòng chọn đủ tàu")
         }else{
-            Emitter.instance.emit("START",this.playerId);
             Emitter.instance.emit('SavePlayerId',this.playerId);
+            Emitter.instance.emit("START",this.playerId);
             this.shipBool.active=false;
             this.turnOffDraDrop();
         }
@@ -65,9 +65,15 @@ cc.Class({
                 if(length==0){
                     cc.log("no");
                     Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:true,worldPosition:data.worldPosition,shipLength:length});
+
+                    Emitter.instance.emit(EVENT_NAME.COMPLETE_HIT_SHIP)
                 }else{
                     cc.log("trung");
                     Emitter.instance.emit(EVENT_NAME.SEND_RESULT,{isHit:true,worldPosition:data.worldPosition,shipLength:length});
+
+                    const { position } = data;
+                    cc.log('enemy call:', data);
+                    Emitter.instance.emit(EVENT_NAME.HIT_SHIP, {row: position.y, column: position.x})
                 }
             }
         }

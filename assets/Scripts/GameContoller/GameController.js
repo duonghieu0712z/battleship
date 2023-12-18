@@ -28,6 +28,9 @@ cc.Class({
         cc.log(Emitter)
         this.playerId = 0;
         this.enemyId = 1;
+        Emitter.instance.registerOnce('setEnemyId', (enemyId) => {
+            this.enemyId = enemyId;
+        })
         Emitter.instance.registerOnce(EVENT_NAME.START,this.setPlayerIdStartGame.bind(this))
         Emitter.instance.registerEvent(EVENT_NAME.CHANGE_SCENE, this.changeScene.bind(this))
         Emitter.instance.registerEvent(EVENT_NAME.SEND_RESULT, this.playAnimation.bind(this))
@@ -44,7 +47,7 @@ cc.Class({
             methods: {
                 onChangePlayerScene: this.onChangePlayerScene.bind(this),
                 onChangeEnemyScene: this.onChangeEnemyScene.bind(this),
-                //onChangeEndScene: this.onChangeEndScene.bind(this),
+                // onChangeEndScene: this.onChangeEndScene.bind(this),
                 onEnterEnemyScene: this.onEnterEnemyScene.bind(this),
                 onEnterPlayerScene: this.onEnterPlayerScene.bind(this),
                 OnChangeShipFailScene: this.changeSceneShipFail.bind(this)
@@ -57,16 +60,16 @@ cc.Class({
         cc.log(this.playerId);
         this.piravte.node.active= true;
         this.fsm.changeEnemyScene();
-        cc.tween(this.node)
-            .delay(5)
-            .call(()=>{
-                const object = {
-                    playerId:0,
-                    position:{x:0,y:0}
-                }
-                cc.log('twwen');
-                Emitter.instance.emit(EVENT_NAME.POSITION,object)
-            }).start()
+        // cc.tween(this.node)
+        //     .delay(5)
+        //     .call(()=>{
+        //         const object = {
+        //             playerId:0,
+        //             position:{x:0,y:0}
+        //         }
+        //         cc.log('twwen');
+        //         Emitter.instance.emit(EVENT_NAME.POSITION,object)
+        //     }).start()
     },
     onChangePlayerScene() {
         cc.log("chuyen player");
@@ -83,22 +86,25 @@ cc.Class({
         cc.log("hello enemy");
         //bug
         Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
-            cc.log(data)
             data.playerId = this.playerId;
-            Emitter.instance.emit(EVENT_NAME.STOP_CLOCK)
+            cc.log('enemy data', data)
+            // Emitter.instance.emit(EVENT_NAME.STOP_CLOCK)
             Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
+            // Emitter.instance.emit('checkTile', data);
         })
-        Emitter.instance.emit(EVENT_NAME.COLD_DOWN_CLOCK)
+        Emitter.instance.emit(EVENT_NAME.CHOOSE_COORDINATES)
+        // Emitter.instance.emit(EVENT_NAME.COLD_DOWN_CLOCK)
     },
     onEnterPlayerScene() {
         cc.log("hello player ");
         //bug
         Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
             data.playerId = this.enemyId;
-            Emitter.instance.emit(EVENT_NAME.STOP_CLOCK)
-            Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
+            // Emitter.instance.emit(EVENT_NAME.STOP_CLOCK)
+            // Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
+            Emitter.instance.emit('checkTile', data);
         })
-        Emitter.instance.emit(EVENT_NAME.COLD_DOWN_CLOCK)
+        // Emitter.instance.emit(EVENT_NAME.COLD_DOWN_CLOCK)
     },
     playAnimation(data) {
         cc.log('send result: ' + data)

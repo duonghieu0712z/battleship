@@ -19,7 +19,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        cc.log(this.node.parent)
+        // cc.log(this.node.parent)
         Emitter.instance.registerOnce("attackToPosition", this.onAttack.bind(this));
     },
     start() {
@@ -30,7 +30,7 @@ cc.Class({
         this.node.getComponent(cc.Sprite).spriteFrame = this.bomSprite;
     },
     onAttack(data) {
-        cc.log(data);
+        // cc.log(data);
         cc.tween(this.node)
             .delay(0.94)
             .parallel(
@@ -50,6 +50,6 @@ cc.Class({
         Emitter.instance.emit(EVENT_NAME.PLAY_ANI,data)
     },
     onDestroy() {
-        cc.log("bom xoá")
+        // cc.log("bom xoá")
     }
 });

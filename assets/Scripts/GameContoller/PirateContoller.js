@@ -106,6 +106,6 @@ cc.Class({
         }
     },
     update() {
-        cc.log(this.fsm.state)
+        // cc.log(this.fsm.state)
     }
 });

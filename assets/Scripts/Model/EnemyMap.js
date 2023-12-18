@@ -1,5 +1,7 @@
-const Emitter = require('EventEmitter');
-const Ship = require('Ship');
+const Emitter = require("EventEmitter");
+
+const Ship = require("Ship");
+
 cc.Class({
     extends: cc.Component,
 
@@ -9,24 +11,45 @@ cc.Class({
         tilePrefab: cc.Prefab,
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
-        this.map = new Array(this.rows).fill(null).map(() => new Array(this.cols).fill(null));
+        this.map = new Array(this.rows)
+            .fill(null)
+            .map(() => new Array(this.cols).fill(null));
         this.enemyId = null;
         this.creatMap();
+
+        const onSetEnemyShipPos = this.setShip.bind(this);
+        Emitter.instance.registerEvent("set-enemy-ship-pos", onSetEnemyShipPos);
+
+        Emitter.instance.registerEvent("checkTile", this.checkTile.bind(this));
+
+        Emitter.instance.registerEvent(
+            "setEnemyId",
+            (enemyId) => (this.enemyId = enemyId),
+        );
+
+        Emitter.instance.registerEvent("log-enemy-map", () =>
+            cc.log(
+                "random ship",
+                this.map.map((row) =>
+                    row.map((tile) => tile.getComponent("Tile").shipId),
+                ),
+            ),
+        );
     },
 
     start() {
         this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-        this.map[0][0].getComponent("Tile").isShooted = true;
+        // this.map[0][0].getComponent("Tile").isShooted = true;
     },
+
     onTouchEnd(event) {
         cc.log("co nhan");
         let touchPosGlobal = event.getLocation();
         let touchPosLocal = this.node.convertToNodeSpaceAR(touchPosGlobal);
         this.convertPosition(touchPosLocal);
     },
+
     convertPosition(pos) {
         let posX = pos.x - 30;
         let posY = pos.y + 30;
@@ -37,9 +60,10 @@ cc.Class({
             cc.log("ô này đã bị bắn");
         } else {
             cc.log("Gửi cho player có thể bắn");
-            Emitter.instance.emit('sendCoordinates', { x: stepX, y: -stepY });
+            Emitter.instance.emit("sendCoordinates", { x: stepX, y: -stepY });
         }
     },
+
     test() {
         // for (let i = 0; i < 4; i++) {
         //     let a = new Ship(4, true);
@@ -48,12 +72,13 @@ cc.Class({
         //     a.calculatePosition(x, y,false);
         //     this.setShip({arrayPos:a.positions,shipId:a.shipId});
         // }
-        this.node.active=!this.node.active;
-
+        this.node.active = !this.node.active;
     },
+
     getRandomIntegerInRange(minValue, maxValue) {
         return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
     },
+
     creatMap() {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
@@ -63,21 +88,25 @@ cc.Class({
             }
         }
     },
+
     setShip(data) {
-        cc.log(data);
-        if (this.checkAvailable(data.arrayPos)) {
+        data.isSuccess = this.checkAvailable(data.arrayPos);
+        if (data.isSuccess) {
             for (let i = 0; i < data.arrayPos.length; i++) {
-                let tile = this.map[ data.arrayPos[i].y][ data.arrayPos[i].x];
+                let tile = this.map[data.arrayPos[i].y][data.arrayPos[i].x];
                 tile.getComponent("Tile").shipId = data.shipId;
-                cc.log(data.shipId);
             }
-        }else{
-            cc.log("fail");
         }
     },
+
     checkAvailable(arrayPos) {
         for (let i = 0; i < arrayPos.length; i++) {
-            if (arrayPos[i].y < 0 || arrayPos[i].y >= this.rows || arrayPos[i].x < 0 || arrayPos[i].x >= this.rows) {
+            if (
+                arrayPos[i].y < 0 ||
+                arrayPos[i].y >= this.rows ||
+                arrayPos[i].x < 0 ||
+                arrayPos[i].x >= this.rows
+            ) {
                 return false;
             }
             let tile = this.map[arrayPos[i].y][arrayPos[i].x];
@@ -87,19 +116,36 @@ cc.Class({
         }
         return true;
     },
+
     checkTile(data) {
         if (this.enemyId == data.playerId) {
             let node = this.map[data.position.y][data.position.x];
-            let mapPosition = new cc.Vec2(node.x + this.node.x, node.y + this.node.y);
-            let mapcotainerPosition = new cc.Vec2(mapPosition.x + this.node.parent.x, mapPosition.y + this.node.parent.y);
-            let targetPosition = new cc.Vec2(mapcotainerPosition.x + this.node.parent.parent.x, mapcotainerPosition.y + this.node.parent.parent.y);
+            let mapPosition = new cc.Vec2(
+                node.x + this.node.x,
+                node.y + this.node.y,
+            );
+            let mapcotainerPosition = new cc.Vec2(
+                mapPosition.x + this.node.parent.x,
+                mapPosition.y + this.node.parent.y,
+            );
+            let targetPosition = new cc.Vec2(
+                mapcotainerPosition.x + this.node.parent.parent.x,
+                mapcotainerPosition.y + this.node.parent.parent.y,
+            );
             let shipId = node.getComponent("Tile").shipId;
-            Emitter.instance.emit('receiveresult', { playerId: this.enemyId, worldPosition: targetPosition, shipId: shipId });
+            cc.log("enemy ship", shipId);
+            Emitter.instance.emit("receiveresult", {
+                playerId: this.enemyId,
+                worldPosition: targetPosition,
+                shipId: shipId,
+            });
+            node.getComponent("Tile").isShooted = true;
             cc.tween(this.node)
-            .delay(3)
-            .call(()=>{
-                node.getComponent("Tile").changeState();
-            }).start()
+                .delay(3)
+                .call(() => {
+                    node.getComponent("Tile").changeState();
+                })
+                .start();
         }
     },
 });
