@@ -1,14 +1,16 @@
 const Emitter = require("EventEmitter");
 const EVENT_NAME = require("NAME_EVENT");
 
-const { randomPosition, randomAroundPositions } = require("rands");
+const { randomPosition, randomHitShip } = require("rands");
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
         _isHitting: false,
-        _hitPos: [],
+        _hitShips: {
+            default: {},
+        },
         _saveHitPos: [],
 
         _maxRow: 8,
@@ -17,17 +19,19 @@ cc.Class({
 
     onLoad() {
         this.enemyId = Math.floor(Math.random() * Date.now()).toString();
+        this._maxRow = 4;
+        this._maxColumn = 4;
 
         const onChooseCoordinates = this.chooseCoordinates.bind(this);
         Emitter.instance.registerEvent(
             EVENT_NAME.CHOOSE_COORDINATES,
-            onChooseCoordinates,
+            onChooseCoordinates
         );
 
         const onCompleteHitShip = this.onCompleteHitShip.bind(this);
         Emitter.instance.registerEvent(
             EVENT_NAME.COMPLETE_HIT_SHIP,
-            onCompleteHitShip,
+            onCompleteHitShip
         );
 
         const onHitShip = this.onHitShip.bind(this);
@@ -35,7 +39,7 @@ cc.Class({
 
         Emitter.instance.registerEvent(
             "receiveresult",
-            this.responeResult.bind(this),
+            this.responeResult.bind(this)
         );
     },
 
@@ -45,20 +49,19 @@ cc.Class({
 
     chooseCoordinates() {
         let position = null;
-        cc.log("enemy called");
         do {
             if (!this._isHitting) {
                 position = randomPosition(this._maxRow, this._maxColumn);
             } else {
-                position = randomAroundPositions(
-                    this._hitPos,
+                position = randomHitShip(
+                    this._hitShips,
                     this._maxRow,
-                    this._maxColumn,
+                    this._maxColumn
                 );
             }
         } while (this.hasHitShip(position));
-        cc.log("enemy position: ", position);
         this._saveHitPos.push(position);
+        cc.log('enemy shoot', position)
 
         Emitter.instance.emit(EVENT_NAME.POSITION, {
             position: {
@@ -72,18 +75,27 @@ cc.Class({
     hasHitShip(position) {
         return this._saveHitPos.some(
             (value) =>
-                value.row === position.row && value.column === position.column,
+                value.row === position.row && value.column === position.column
         );
     },
 
-    onHitShip(position) {
+    onHitShip(data) {
+        const { shipId, position } = data;
+        if (this._hitShips[shipId]) {
+            this._hitShips[shipId].push(position);
+        } else {
+            this._hitShips[shipId] = [position];
+        }
+
         this._isHitting = true;
-        this._hitPos.push(position);
     },
 
-    onCompleteHitShip() {
-        this._isHitting = false;
-        this._hitPos = [];
+    onCompleteHitShip(shipId) {
+        delete this._hitShips[shipId];
+
+        if (Object.keys(this._hitShips).length === 0) {
+            this._isHitting = false;
+        }
     },
 
     responeResult(data) {
