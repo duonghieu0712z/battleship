@@ -19,8 +19,6 @@ cc.Class({
 
     onLoad() {
         this.enemyId = Math.floor(Math.random() * Date.now()).toString();
-        this._maxRow = 4;
-        this._maxColumn = 4;
 
         const onChooseCoordinates = this.chooseCoordinates.bind(this);
         Emitter.instance.registerEvent(
