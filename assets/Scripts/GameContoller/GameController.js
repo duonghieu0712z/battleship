@@ -92,7 +92,7 @@ cc.Class({
             Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
                 data.playerId = this.enemyId;
                 Emitter.instance.emit('checkTile', data);
-                this.clockPlayer.node.getComponent('ClockController').stopClock();
+                // this.clockPlayer.node.getComponent('ClockController').stopClock();
             })
         })
     },
@@ -118,7 +118,7 @@ cc.Class({
                 })
                 .delay(1.5)
                 .call(() => {
-                    this.clockEnemy.node.getComponent('ClockController').stopClock();
+                    // this.clockEnemy.node.getComponent('ClockController').stopClock();
                     Emitter.instance.emit(EVENT_NAME.CHOOSE_COORDINATES)
                 }).start()
         })
@@ -135,11 +135,11 @@ cc.Class({
     },
     restTurn() {
         if (this.fsm.state === 'playerScene') {
-            this.clockPlayer.node.getComponent('ClockController').onEnable();
+            // this.clockPlayer.node.getComponent('ClockController').onEnable();
             this.fsm.changePlayerScene()
         }
         if (this.fsm.state === 'enemyScene') {
-            this.clockEnemy.node.getComponent('ClockController').onEnable();
+            // this.clockEnemy.node.getComponent('ClockController').onEnable();
             this.fsm.changeEnemyScene()
         }
     },

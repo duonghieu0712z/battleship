@@ -21,6 +21,15 @@ let Ship=cc.Class({
         this.anchorIndex=Math.floor(this.length/2);
         this.positions=[];
         this.creatPos();
+
+        Emitter.instance.registerEvent('updateLength', this.updateLength.bind(this));
+        Emitter.instance.registerEvent('showShip', (shipId) => {
+            if (this.shipId !== shipId) {
+                return;
+            }
+
+            this.node.active = true;
+        })
     },
     creatPos(){
         for(let i=0;i<this.length;i++){
@@ -72,6 +81,16 @@ this.node.getChildByName("shipSprite").runAction(repeatedAction);
             this.node.rotation=90;
         }
         this.calculatePosition(this.positions[this.anchorIndex].x, this.positions[this.anchorIndex].y,true);
-    }
+    },
+
+    updateLength(shipId, out) {
+        if (this.shipId !== shipId) {
+            return;
+        }
+
+        this.length--;
+        cc.log(this.length)
+        out.length = this.length;
+    },
 });
 module.exports=Ship;

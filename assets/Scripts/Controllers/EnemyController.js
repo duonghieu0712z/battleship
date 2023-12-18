@@ -59,7 +59,7 @@ cc.Class({
             }
         } while (this.hasHitShip(position));
         this._saveHitPos.push(position);
-        cc.log('enemy shoot', position)
+        cc.log("enemy shoot", position);
 
         Emitter.instance.emit(EVENT_NAME.POSITION, {
             position: {
@@ -115,6 +115,7 @@ cc.Class({
                         worldPosition: data.worldPosition,
                         shipLength: length,
                     });
+                    Emitter.instance.emit("showShip", { shipId: data.shipId });
                 } else {
                     cc.log("trung");
                     Emitter.instance.emit(EVENT_NAME.SEND_RESULT, {

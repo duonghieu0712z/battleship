@@ -1,5 +1,3 @@
-const Ship = require("Ship");
-
 const { randomPosition } = require("rands");
 const Emitter = require("EventEmitter");
 
@@ -7,22 +5,16 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        shipPool: [Ship],
+        shipPool: [cc.Prefab],
     },
 
     onLoad() {
-        this.shipPool.push(new Ship(4));
-        this.shipPool.push(new Ship(3));
-        this.shipPool.push(new Ship(2));
-        this.shipPool.push(new Ship(1));
-
+        // this.shipPool.push(new Ship(4));
+        // this.shipPool.push(new Ship(3));
+        // this.shipPool.push(new Ship(2));
+        // this.shipPool.push(new Ship(1));
         // const onRandomShips = this.onRandomShips.bind(this);
         // Emitter.instance.registerOnce("random-enemy-ship", onRandomShips);
-
-        Emitter.instance.registerEvent(
-            "updateLength",
-            this.updateLength.bind(this),
-        );
     },
 
     start() {
@@ -31,7 +23,12 @@ cc.Class({
     },
 
     onRandomShips() {
-        this.shipPool.forEach((ship) => {
+        this.shipPool.forEach((prefab) => {
+            const node = cc.instantiate(prefab);
+            node.parent = this.node;
+            node.active = false;
+
+            const ship = node.getComponent("Ship");
             this.onRandomShip(ship);
         });
     },
@@ -48,19 +45,5 @@ cc.Class({
             data.shipId = ship.shipId;
             Emitter.instance.emit("set-enemy-ship-pos", data);
         } while (!data.isSuccess);
-    },
-
-    getShipById(shipId) {
-        for (let index = 0; index < this.shipPool.length; index++) {
-            if (this.shipPool[index].shipId == shipId) {
-                return this.shipPool[index];
-            }
-        }
-    },
-
-    updateLength(shipId, out) {
-        let ship = this.getShipById(shipId);
-        ship.length -= 1;
-        out.length = ship.length;
     },
 });
