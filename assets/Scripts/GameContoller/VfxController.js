@@ -38,15 +38,16 @@ cc.Class({
         if (this.isHit) {
             let myanimation = this.bom.getComponent(cc.Animation);
             myanimation.play(myanimation.getClips()[0].name)
+            Emitter.instance.emit(EVENT_NAME.SOUND_EXPLOSION);
             if (this.shipLength !== 0)
                 Emitter.instance.emit(EVENT_NAME.IS_SHOOT_SHIP, true);
         } else {
             let myanimation = this.bom.getComponent(cc.Animation);
             myanimation.play(myanimation.getClips()[1].name)
+            Emitter.instance.emit(EVENT_NAME.SOUND_SHOOT_WATER);
             if (this.shipLength !== 0)
                 Emitter.instance.emit(EVENT_NAME.IS_SHOOT_SHIP, false)
         }
-        cc.log(this.shipLength)
     },
     destroyNode() {
         if (this.shipLength === 0) Emitter.instance.emit(EVENT_NAME.SHIP_FAIL)

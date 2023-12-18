@@ -7,28 +7,51 @@ cc.Class({
     properties: {},
 
     onLoad() {
-        this._onAttack = this.onAttack.bind(this)
+/*        this._onAttack = this.onAttack.bind(this)
         this._onFinal = this.onFinal.bind(this)
         this._onAttackToAttack = this.onAttackToAttack.bind(this)
-        this._onShipFail = this.onShipFail.bind(this)
+        this._onShipFail = this.onShipFail.bind(this)*/
         Emitter.instance.registerEvent(EVENT_NAME.IS_SHOOT_SHIP, this.handleState.bind(this))
+        Emitter.instance.registerEvent(EVENT_NAME.CHANGE_SCENE_CLOCK, this.handleState.bind(this))
         Emitter.instance.registerEvent(EVENT_NAME.SHIP_FAIL, this.changeStateShipFail.bind(this))
-        this.fsm = new StateMachine({
+/*        this.fsm = new StateMachine({
             init: 'init',
             transitions: [
-                {name: 'attack', from: ['init', 'changeState', 'shipFailState'], to: 'attackState'},
-                {name: 'final', from: 'attackState', to: 'changeState'},
+                {name: 'attack', from: ['init', 'changeStatePri', 'shipFailState'], to: 'attackState'},
+                {name: 'final', from: 'attackState', to: 'changeStatePri'},
                 {name: 'attackToAttack', from: 'attackState', to: 'attackState'},
-                {name: 'shipFail', from: ['attackState', 'changeState'], to: 'shipFailState'},
+                {name: 'clockOverTime', from: 'attackState', to: 'changeStatePri'},
+                {name: 'shipFail', from: ['attackState', 'changeStatePri'], to: 'shipFailState'},
             ],
             methods: {
                 onAttack: this._onAttack,
                 onFinal: this._onFinal,
                 onAttackToAttack: this._onAttackToAttack,
                 onShipFail: this._onShipFail,
+                onClockOverTime:this.clockOverTime.bind(this)
             }
-        });
-        this.fsm.attack();
+        });*/
+        this.onAttack();
+    },
+    clockOverTime(){
+        let talkString = this.node.children[0].children[0].getComponent(cc.Label);
+        let arrayTalking = {CB: "BOY IS OVER TIME", YT: "YOURS TURN HAS FINISHED"}
+        cc.tween(talkString.node)
+            .call(() => {
+                talkString.string = arrayTalking.CB
+            })
+            .delay(1)
+            .call(() => {
+                talkString.string = arrayTalking.YT
+            })
+            .delay(1)
+            .call(() => {
+                Emitter.instance.emit(EVENT_NAME.CHANGE_SCENE, true)
+            })
+            .call(()=>{
+                this.onAttack();
+            })
+            .start()
     },
     onAttack() {
         let talkString = this.node.children[0].children[0].getComponent(cc.Label);
@@ -48,7 +71,9 @@ cc.Class({
             .delay(1)
             .call(() => {
                 Emitter.instance.emit(EVENT_NAME.CHANGE_SCENE, true)
-                this.fsm.attack();
+            })
+            .call(()=>{
+                this.onAttack();
             })
             .start()
     },
@@ -66,7 +91,10 @@ cc.Class({
             .delay(1)
             .call(() => {
                 talkString.string = arrayTalking.SA
-                Emitter.instance.emit(EVENT_NAME.RESET_TURN)
+                Emitter.instance.emit(EVENT_NAME.CHANGE_SCENE,false)
+            })
+            .call(()=>{
+                this.onAttack();
             })
             .start()
     },
@@ -88,21 +116,24 @@ cc.Class({
             .delay(1)
             .call(() => {
                 talkString.string = arrayTalking.SA
-                Emitter.instance.emit(EVENT_NAME.RESET_TURN)
-                this.fsm.attack();
+                Emitter.instance.emit(EVENT_NAME.SHIP_FAIL_CHECK)
+                this.onAttack();
             })
             .start()
     },
-    changeStateShipFail(){
-        this.fsm.shipFail();
+    changeStateShipFail() {
+        this.onShipFail();
     },
     handleState(data) {
         cc.log("pre" + data)
-        if (data) {
-            this.fsm.attackToAttack();
-        } else {
-            cc.log("hello")
-            this.fsm.final();
+        if (data === true) {
+            this.onAttackToAttack();
+        } else if (data === false) {
+            this.onFinal();
+
+        } else if (data === undefined) {
+            cc.log("pirate final")
+            this.clockOverTime();
         }
     },
     update() {
