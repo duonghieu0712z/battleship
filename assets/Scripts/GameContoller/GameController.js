@@ -82,17 +82,18 @@ cc.Class({
         this.pirate.node.active = false;
         this.mapEnemy.active = false;
         this.mapPlayer.active = false;
-        this.clockEnemy.node.active = false;
         Emitter.instance.emit(EVENT_NAME.YOUR_TURN_PANEL)
         Emitter.instance.registerOnce(EVENT_NAME.YOUR_TURN_PANEL_DONE, () => {
             this.mapEnemy.active = true;
-            this.clockPlayer.node.active = true;
             this.pirate.node.active = true;
+            let spine =this.pirate.node.getComponent(sp.Skeleton)
 
             Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
                 data.playerId = this.enemyId;
+                spine.clearTracks()
+                spine.setAnimation(0,"Attack_2",false)
+                spine.addAnimation(0,"Idle",true)
                 Emitter.instance.emit('checkTile', data);
-                this.clockPlayer.node.getComponent('ClockController').stopClock();
             })
         })
     },
@@ -101,12 +102,9 @@ cc.Class({
         this.pirate.node.active = false;
         this.mapEnemy.active = false;
         this.mapPlayer.active = false;
-        this.clockEnemy.node.active = false;
-        this.clockPlayer.node.active = false;
         Emitter.instance.emit(EVENT_NAME.ENEMY_TURN_PANEL)
         Emitter.instance.registerOnce(EVENT_NAME.ENEMY_TURN_PANEL_DONE, () => {
             this.mapPlayer.active = true
-            this.clockEnemy.node.active = true;
             this.pirate.node.active = true;
             Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
                 data.playerId = this.playerId;
@@ -118,8 +116,11 @@ cc.Class({
                 })
                 .delay(1.5)
                 .call(() => {
-                    this.clockEnemy.node.getComponent('ClockController').stopClock();
                     Emitter.instance.emit(EVENT_NAME.CHOOSE_COORDINATES)
+                    let spine =this.pirate.node.getComponent(sp.Skeleton)
+                    spine.clearTracks()
+                    spine.setAnimation(0,"Attack_1",false)
+                    spine.addAnimation(0,"Idle",true)
                 }).start()
         })
     },
@@ -135,11 +136,9 @@ cc.Class({
     },
     restTurn() {
         if (this.fsm.state === 'playerScene') {
-            this.clockPlayer.node.getComponent('ClockController').onEnable();
             this.fsm.changePlayerScene()
         }
         if (this.fsm.state === 'enemyScene') {
-            this.clockEnemy.node.getComponent('ClockController').onEnable();
             this.fsm.changeEnemyScene()
         }
     },

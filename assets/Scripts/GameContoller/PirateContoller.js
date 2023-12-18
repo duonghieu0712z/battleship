@@ -5,7 +5,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {},
-
+    onEnable(){
+        let spine =this.node.getComponent(sp.Skeleton)
+        spine.clearTracks()
+        spine.setAnimation(0,"Idle",true)
+    },
     onLoad() {
 /*        this._onAttack = this.onAttack.bind(this)
         this._onFinal = this.onFinal.bind(this)
