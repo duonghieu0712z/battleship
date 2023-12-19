@@ -5,14 +5,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        shipPool: [cc.Prefab],
+        shipPrefabs: [cc.Prefab],
+        pool: cc.Node,
     },
 
     onLoad() {
-        // this.shipPool.push(new Ship(4));
-        // this.shipPool.push(new Ship(3));
-        // this.shipPool.push(new Ship(2));
-        // this.shipPool.push(new Ship(1));
         // const onRandomShips = this.onRandomShips.bind(this);
         // Emitter.instance.registerOnce("random-enemy-ship", onRandomShips);
     },
@@ -23,9 +20,9 @@ cc.Class({
     },
 
     onRandomShips() {
-        this.shipPool.forEach((prefab) => {
+        this.shipPrefabs.forEach((prefab) => {
             const node = cc.instantiate(prefab);
-            node.parent = this.node;
+            node.parent = this.pool;
             node.active = false;
 
             const ship = node.getComponent("Ship");
@@ -41,6 +38,7 @@ cc.Class({
             const pos = randomPosition(8, 8);
             ship.calculatePosition(pos.column, pos.row, false);
 
+            data.ship = ship;
             data.arrayPos = ship.positions;
             data.shipId = ship.shipId;
             Emitter.instance.emit("set-enemy-ship-pos", data);

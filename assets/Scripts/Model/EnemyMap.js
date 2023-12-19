@@ -105,14 +105,18 @@ cc.Class({
         let stepX=data.arrayPos[anchorIndex].x;
         let stepY=data.arrayPos[anchorIndex].y+1;
         let position=new cc.Vec2(stepX*55+25,stepY*-55+25);
-        cc.log(position);
         let isHorizontal=true;
         if(data.arrayPos.length!=1){
             if(data.arrayPos[anchorIndex].y!=data.arrayPos[anchorIndex-1].y){
                 isHorizontal=false;
             }
         }
-        Emitter.instance.emit("addShipBool", { shipId:data.shipId,length:data.arrayPos.length,position:position,isHorizontal:isHorizontal});
+
+        const ship = data.ship;
+        ship.node.position=position;
+        if(!ship.isHorizontal){
+            ship.node.angle = -90;
+        }
     },
     checkAvailable(arrayPos) {
         for (let i = 0; i < arrayPos.length; i++) {

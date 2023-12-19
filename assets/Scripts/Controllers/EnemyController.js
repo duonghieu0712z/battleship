@@ -115,7 +115,7 @@ cc.Class({
                         worldPosition: data.worldPosition,
                         shipLength: length,
                     });
-                    Emitter.instance.emit("showShip", { shipId: data.shipId });
+                    Emitter.instance.emit("showShip", data.shipId);
                 } else {
                     cc.log("trung");
                     Emitter.instance.emit(EVENT_NAME.SEND_RESULT, {

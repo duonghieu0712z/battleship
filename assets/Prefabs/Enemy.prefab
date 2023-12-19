@@ -25,14 +25,14 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 12
+        "__id__": 11
       },
       {
-        "__id__": 13
+        "__id__": 12
       }
     ],
     "_prefab": {
-      "__id__": 14
+      "__id__": 13
     },
     "_opacity": 255,
     "_color": {
@@ -95,11 +95,11 @@
     "_level": 2,
     "_components": [
       {
-        "__id__": 10
+        "__id__": 9
       }
     ],
     "_prefab": {
-      "__id__": 11
+      "__id__": 10
     },
     "_opacity": 255,
     "_color": {
@@ -275,13 +275,9 @@
     "_children": [],
     "_active": true,
     "_level": 3,
-    "_components": [
-      {
-        "__id__": 8
-      }
-    ],
+    "_components": [],
     "_prefab": {
-      "__id__": 9
+      "__id__": 8
     },
     "_opacity": 255,
     "_color": {
@@ -326,30 +322,6 @@
     "_id": ""
   },
   {
-    "__type__": "b182auVPGJFjIAGNABvHI9H",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 7
-    },
-    "_enabled": true,
-    "shipPefab": [
-      {
-        "__uuid__": "540fe9f1-8540-4537-b859-d0910e15c1c7"
-      },
-      {
-        "__uuid__": "d731c4ef-8414-40cb-88b3-63470f6bdbd7"
-      },
-      {
-        "__uuid__": "fb0ae9f9-f2ab-427c-b159-f95e55a19bb5"
-      },
-      {
-        "__uuid__": "519f46db-64ea-45e8-893c-c551b181e781"
-      }
-    ],
-    "_id": ""
-  },
-  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -362,7 +334,7 @@
   },
   {
     "__type__": "cc.Sprite",
-    "_name": "",
+    "_name": "EnemyMapContainer<Sprite>",
     "_objFlags": 0,
     "node": {
       "__id__": 2
@@ -426,7 +398,23 @@
       "__id__": 1
     },
     "_enabled": true,
-    "shipPool": [],
+    "shipPrefabs": [
+      {
+        "__uuid__": "519f46db-64ea-45e8-893c-c551b181e781"
+      },
+      {
+        "__uuid__": "fb0ae9f9-f2ab-427c-b159-f95e55a19bb5"
+      },
+      {
+        "__uuid__": "d731c4ef-8414-40cb-88b3-63470f6bdbd7"
+      },
+      {
+        "__uuid__": "540fe9f1-8540-4537-b859-d0910e15c1c7"
+      }
+    ],
+    "pool": {
+      "__id__": 7
+    },
     "_id": ""
   },
   {

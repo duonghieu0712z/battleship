@@ -29,13 +29,10 @@
     "_components": [
       {
         "__id__": 8
-      },
-      {
-        "__id__": 9
       }
     ],
     "_prefab": {
-      "__id__": 10
+      "__id__": 9
     },
     "_opacity": 255,
     "_color": {
@@ -284,19 +281,6 @@
     "sync": false
   },
   {
-    "__type__": "ec274RAA99FIYdwpCtqqTID",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "shipSprite": {
-      "__id__": 5
-    },
-    "_id": ""
-  },
-  {
     "__type__": "306811SyINK4YlworkZ43RU",
     "_name": "",
     "_objFlags": 0,
@@ -305,7 +289,6 @@
     },
     "_enabled": true,
     "length": 4,
-    "isHorizontal": true,
     "_id": ""
   },
   {

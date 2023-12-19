@@ -23,13 +23,7 @@ let Ship=cc.Class({
         this.creatPos();
 
         Emitter.instance.registerEvent('updateLength', this.updateLength.bind(this));
-        Emitter.instance.registerEvent('showShip', (shipId) => {
-            if (this.shipId !== shipId) {
-                return;
-            }
-
-            this.node.active = true;
-        })
+        Emitter.instance.registerEvent('showShip', this.showShip.bind(this));
     },
     creatPos(){
         for(let i=0;i<this.length;i++){
@@ -92,5 +86,17 @@ this.node.getChildByName("shipSprite").runAction(repeatedAction);
         cc.log(this.length)
         out.length = this.length;
     },
+
+    showShip(shipId) {
+        cc.log('show ship', shipId)
+        if (this.shipId !== shipId) {
+            return;
+        }
+
+        cc.tween(this.node)
+            .delay(3)
+            .call(() => this.node.active = true)
+            .start();
+    }
 });
 module.exports=Ship;
