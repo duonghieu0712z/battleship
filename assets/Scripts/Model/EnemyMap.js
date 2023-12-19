@@ -135,23 +135,12 @@ cc.Class({
     checkTile(data) {
         if (this.enemyId == data.playerId) {
             let node = this.map[data.position.y][data.position.x];
-            let mapPosition = new cc.Vec2(
-                node.x + this.node.x,
-                node.y + this.node.y,
-            );
-            let mapcotainerPosition = new cc.Vec2(
-                mapPosition.x + this.node.parent.x,
-                mapPosition.y + this.node.parent.y,
-            );
-            let targetPosition = new cc.Vec2(
-                mapcotainerPosition.x + this.node.parent.parent.x,
-                mapcotainerPosition.y + this.node.parent.parent.y,
-            );
+            let targetPosition = node.convertToNodeSpaceAR(cc.v2(0,0));
             let shipId = node.getComponent("Tile").shipId;
             cc.log("enemy ship", shipId);
             Emitter.instance.emit("receiveresult", {
                 playerId: this.enemyId,
-                worldPosition: targetPosition,
+                worldPosition: targetPosition.mul(-1),
                 shipId: shipId,
             });
             node.getComponent("Tile").isShooted = true;
