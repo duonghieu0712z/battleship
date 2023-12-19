@@ -17,15 +17,20 @@ const eventName = {
     COMPLETE_HIT_SHIP: "complete-hit-ship",
     HIT_SHIP: "hit-ship",
     CHOOSE_COORDINATES: "choose-coordinates",
+
     YOUR_TURN_PANEL: 'UI-yourTurn',
     YOUR_TURN_PANEL_DONE: 'UI-yourTurnDone',
     ENEMY_TURN_PANEL: 'UI-enemyTurn',
     ENEMY_TURN_PANEL_DONE: 'UI-enemyTurnDone',
+
     WAIT_FOR_ENEMY: 'UI-waitForEnemy',
     WAIT_FOR_ENEMY_DONE: 'UI-waitForEnemyDone',
+
     SOUND_CANON_SHOOT: 'SOUND_CANON_SHOOT',
     SOUND_SHOOT_WATER: 'SOUND_SHOOT_WATER',
     SOUND_EXPLOSION: 'SOUND_EXPLOSION',
+    SOUND_CLICK: 'SOUND_CLICK',
+
 
     WIN: 'WIN',
     LOSE: 'LOSE',
