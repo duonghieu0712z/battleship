@@ -4,6 +4,9 @@ let Ship=cc.Class({
     extends: cc.Component,
     properties: {
      length:0,
+     isHorizontal: true,
+
+     shipSprite: cc.Sprite,
     },
     ctor(length,isHorizontal) {
        this.length=length;
@@ -95,7 +98,7 @@ this.node.getChildByName("shipSprite").runAction(repeatedAction);
 
         cc.tween(this.node)
             .delay(3)
-            .call(() => this.node.active = true)
+            .call(() => this.shipSprite.node.active = true)
             .start();
     }
 });

@@ -1,3 +1,5 @@
+const Ship = require("Ship");
+
 const { randomPosition } = require("rands");
 const Emitter = require("EventEmitter");
 
@@ -5,8 +7,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        shipPrefabs: [cc.Prefab],
-        pool: cc.Node,
+        ships: [Ship],
     },
 
     onLoad() {
@@ -20,12 +21,7 @@ cc.Class({
     },
 
     onRandomShips() {
-        this.shipPrefabs.forEach((prefab) => {
-            const node = cc.instantiate(prefab);
-            node.parent = this.pool;
-            node.active = false;
-
-            const ship = node.getComponent("Ship");
+        this.ships.forEach((ship) => {
             this.onRandomShip(ship);
         });
     },
