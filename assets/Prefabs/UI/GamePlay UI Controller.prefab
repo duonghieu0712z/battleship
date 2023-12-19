@@ -117,7 +117,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -881.723,
+      "x": -1500,
       "y": 0,
       "z": 0
     },
@@ -177,9 +177,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "723ivLrqtJ7r7ZFRN6avu1",
+    "fileId": "9bHrTzauZDIJfetan8FxKv",
     "sync": false
   },
   {
@@ -220,7 +220,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 847.174,
+      "x": 1500,
       "y": 0,
       "z": 0
     },
@@ -280,9 +280,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "14s8xaLrtBpY0vO66eNP8g",
+    "fileId": "6dZBI4q55A1KWOJXB7cYX4",
     "sync": false
   },
   {
@@ -459,9 +459,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "c62dV/gmdBHrvK/jmPq8if",
+    "fileId": "71g1FlXe9FXo+61x05DQ/G",
     "sync": false
   },
   {
@@ -677,9 +677,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "44YotX0eJOyKsHupkDpqbi",
+    "fileId": "019e6vhRBJ9p/ZZZTSuWN8",
     "sync": false
   },
   {
@@ -817,9 +817,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "2fxcuQDc1IJar6PfBr65j2",
+    "fileId": "26wkLiMYNF0pvIKA6NIbhI",
     "sync": false
   },
   {
@@ -957,9 +957,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "efgH/phetFWbIy9bayzB1e",
+    "fileId": "7cXA3dDg9Aaa2/5pY+xvCJ",
     "sync": false
   },
   {
@@ -1097,9 +1097,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "07UtZGHSNO0rPh6fOI0A2v",
+    "fileId": "487QtzN/hFb6Vcx1LeMFC3",
     "sync": false
   },
   {
@@ -1237,9 +1237,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "22RSo07u5MtKNsD0z8lSnX",
+    "fileId": "aa4kdJs6tDfKv4XBEljDiT",
     "sync": false
   },
   {
@@ -1377,9 +1377,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "86mm6/Ww9AfLkBH0TRCH3Y",
+    "fileId": "7bqHSpoPpGlKHmdRjrNqKe",
     "sync": false
   },
   {
@@ -1517,9 +1517,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "edKuwokiJLprAyoMj/6xIK",
+    "fileId": "b3wJlCVp9PU706PWtm6U9M",
     "sync": false
   },
   {
@@ -1528,9 +1528,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "77xKHLP+JJhLRYsi/fExoN",
+    "fileId": "02m3mmC6lN4J20T7YJ8VLg",
     "sync": false
   },
   {
@@ -1631,9 +1631,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "efS73gD1JHk4yl1oi7Q/Cd",
+    "fileId": "3duErZ4kpHob77SK5VJ3ps",
     "sync": false
   },
   {
@@ -1734,9 +1734,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "b4uNo3xMJB+qGVmSp1HD1k",
+    "fileId": "b72izsu6ZFfbFlrB++iAsF",
     "sync": false
   },
   {
@@ -1793,9 +1793,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "deHQDr2Z9HKbJM1qa3/h8s",
+    "fileId": "2a+0tGdpJO3Zd9nzjjkeIa",
     "sync": false
   },
   {
@@ -1809,11 +1809,11 @@
     "yourTurnPanel": {
       "__id__": 2
     },
-    "xStartYourTurn": -850,
+    "xStartYourTurn": -1500,
     "enemyTurnPanel": {
       "__id__": 5
     },
-    "xStartEnemyTurn": 850,
+    "xStartEnemyTurn": 1500,
     "circleLoading": {
       "__id__": 49
     },
@@ -1828,9 +1828,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "be5fd487-8f3f-4d48-9e79-ccea5a373a11"
+      "__id__": 0
     },
-    "fileId": "6drYZCRdtBD69ZHWTuIzI/",
+    "fileId": "18YViJSCJHO4+oKUeuD3iD",
     "sync": false
   }
 ]

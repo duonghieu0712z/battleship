@@ -5,10 +5,10 @@ cc.Class({
 
     properties: {
         yourTurnPanel: cc.Node,
-        xStartYourTurn: -1050,
+        xStartYourTurn: -1500,
 
         enemyTurnPanel: cc.Node,
-        xStartEnemyTurn: 1050,
+        xStartEnemyTurn: 1500,
 
         circleLoading: cc.Node,
 
@@ -37,13 +37,17 @@ cc.Class({
     resetPosition(){
         this.yourTurnPanel.x = this.xStartYourTurn;
         this.enemyTurnPanel.x = this.xStartEnemyTurn;
+
+        this.yourTurnPanel.active = false;
+        this.enemyTurnPanel.active = false;
     },
 
     yourTurn(){
+        this.yourTurnPanel.active = true;
         var action = cc.sequence(
             cc.moveTo(0.5, -20, 0),
             cc.moveTo(1, 20 , 0),
-            cc.moveTo(0.5, 850, 0),
+            cc.moveTo(0.5, 1500, 0),
             cc.callFunc(()=>{
                 this.resetPosition();
                 Emitter.instance.emit(EVENT_NAME.YOUR_TURN_PANEL_DONE);
@@ -53,10 +57,11 @@ cc.Class({
     },
 
     enemyTurn(){
+        this.enemyTurnPanel.active = true;
         var action = cc.sequence(
             cc.moveTo(0.5, 20, 0),
             cc.moveTo(1, -20 , 0),
-            cc.moveTo(0.5, -850, 0),
+            cc.moveTo(0.5, -1500, 0),
             cc.callFunc(()=>{
                 this.resetPosition();
                 Emitter.instance.emit(EVENT_NAME.ENEMY_TURN_PANEL_DONE);
