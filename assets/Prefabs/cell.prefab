@@ -98,7 +98,7 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 0,
-      "g": 255,
+      "g": 241,
       "b": 0,
       "a": 255
     },
@@ -152,7 +152,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "c7b375b0-a885-47d8-9e42-5a00088fc4c9"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -165,7 +165,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "4eff6451-785a-4624-9b2a-1251327ee108"
+    },
     "_id": ""
   },
   {
@@ -195,7 +197,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "e505d791-4346-40c9-a1bf-e13a2a4a0393"
+      "__uuid__": "a5bf463c-b1b3-4289-859f-0d1b7a4b8415"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -208,7 +210,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "4eff6451-785a-4624-9b2a-1251327ee108"
+    },
     "_id": ""
   },
   {
@@ -231,6 +235,7 @@
     },
     "effect": [],
     "shipId": null,
+    "isShooted": false,
     "_id": ""
   },
   {
