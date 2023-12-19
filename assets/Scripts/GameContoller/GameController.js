@@ -61,6 +61,8 @@ cc.Class({
                 onChangePlayerScene: this.onChangePlayerScene.bind(this),
                 onChangeEnemyScene: this.onChangeEnemyScene.bind(this),
                 //onChangeEndScene: this.onChangeEndScene.bind(this),
+                onEnterPlayerScene: this.onEnterplayerScene.bind(this),
+                onEnterEnemyScene: this.onEnterenemyScene.bind(this),
                 onChangeShipFailScene: this.changeSceneShipFail.bind(this)
             }
         });
@@ -77,8 +79,8 @@ cc.Class({
             this.fsm.changePlayerScene()
         });
     },
-    onChangePlayerScene() {
-        cc.log("chuyen player");
+    onEnterplayerScene() {
+        cc.log("hello")
         this.pirate.node.active = false;
         this.mapEnemy.active = false;
         this.mapPlayer.active = false;
@@ -86,19 +88,20 @@ cc.Class({
         Emitter.instance.registerOnce(EVENT_NAME.YOUR_TURN_PANEL_DONE, () => {
             this.mapEnemy.active = true;
             this.pirate.node.active = true;
-            let spine =this.pirate.node.getComponent(sp.Skeleton)
-
-            Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
-                data.playerId = this.enemyId;
-                spine.clearTracks()
-                spine.setAnimation(0,"Attack_2",false)
-                spine.addAnimation(0,"Idle",true)
-                Emitter.instance.emit('checkTile', data);
-            })
         })
     },
-    onChangeEnemyScene() {
-        cc.log("chuyen enemy");
+    onChangePlayerScene() {
+        cc.log("chuyen player");
+        Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
+            data.playerId = this.enemyId;
+            let spine = this.pirate.node.getComponent(sp.Skeleton)
+            spine.clearTracks()
+            spine.setAnimation(0, "Attack_2", false)
+            spine.addAnimation(0, "Idle", true)
+            Emitter.instance.emit('checkTile', data);
+        })
+    },
+    onEnterenemyScene() {
         this.pirate.node.active = false;
         this.mapEnemy.active = false;
         this.mapPlayer.active = false;
@@ -106,23 +109,27 @@ cc.Class({
         Emitter.instance.registerOnce(EVENT_NAME.ENEMY_TURN_PANEL_DONE, () => {
             this.mapPlayer.active = true
             this.pirate.node.active = true;
-            Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
-                data.playerId = this.playerId;
-                Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
-                cc.log('playerId EnemyScene', data.playerId)
-            })
-            cc.tween(this.node)
-                .call(() => {
-                })
-                .delay(1.5)
-                .call(() => {
-                    Emitter.instance.emit(EVENT_NAME.CHOOSE_COORDINATES)
-                    let spine =this.pirate.node.getComponent(sp.Skeleton)
-                    spine.clearTracks()
-                    spine.setAnimation(0,"Attack_2",false)
-                    spine.addAnimation(0,"Idle",true)
-                }).start()
         })
+    },
+    onChangeEnemyScene() {
+        cc.log("chuyen enemy");
+
+        Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
+            data.playerId = this.playerId;
+            Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
+            cc.log('playerId EnemyScene', data.playerId)
+        })
+        cc.tween(this.node)
+            .call(() => {
+            })
+            .delay(3)
+            .call(() => {
+                Emitter.instance.emit(EVENT_NAME.CHOOSE_COORDINATES)
+                let spine = this.pirate.node.getComponent(sp.Skeleton)
+                spine.clearTracks()
+                spine.setAnimation(0, "Attack_2", false)
+                spine.addAnimation(0, "Idle", true)
+            }).start()
     },
     playAnimation(data) {
         cc.log(data)
@@ -173,10 +180,9 @@ cc.Class({
     },
     onChangeEndScene(data) {
         let win = true;
-        if(win === data){
+        if (win === data) {
             Emitter.instance.emit(EVENT_NAME.WIN)
-        }
-        else {
+        } else {
             Emitter.instance.emit(EVENT_NAME.LOSE)
         }
     },
