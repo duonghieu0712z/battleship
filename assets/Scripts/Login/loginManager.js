@@ -23,24 +23,24 @@ cc.Class({
 
     // onLoad () {},
 
-    start () {
+    start() {
         this.loginScene.active = true;
         this.loadingScene.active = false;
     },
 
-    update (dt) {
+    update(dt) {
         this.setPercentLabel(Math.floor(percent.value));
     },
 
-    setPercentLabel(percent){
-        this.percentLabel.string = percent+`%`;
+    setPercentLabel(percent) {
+        this.percentLabel.string = percent + `%`;
     },
 
-    loading(){
+    loading() {
         this.loginScene.active = false;
         this.loadingScene.active = true;
 
-        var percentY = (this.yEnd - this.yStart)/100;
+        var percentY = (this.yEnd - this.yStart) / 100;
 
         cc.tween(percent)
         .delay(0.5)
@@ -55,10 +55,18 @@ cc.Class({
         .to(0.2, { value: 90 })
         .delay(0.2)
         .to(1, { value: 100 })
+        .delay(1)
+        .call(()=>{
+            this.loadMainScene();
+        })
         .start()
 
          cc.tween(this.loadingWaves)
         .to(5.2, { y: this.yEnd })
         .start()
+    },
+
+    loadMainScene(){
+        cc.director.loadScene("mainScene");
     }
 });

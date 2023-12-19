@@ -61,6 +61,8 @@ cc.Class({
                 onChangePlayerScene: this.onChangePlayerScene.bind(this),
                 onChangeEnemyScene: this.onChangeEnemyScene.bind(this),
                 //onChangeEndScene: this.onChangeEndScene.bind(this),
+                onEnterPlayerScene: this.onEnterplayerScene.bind(this),
+                onEnterEnemyScene: this.onEnterenemyScene.bind(this),
                 onChangeShipFailScene: this.changeSceneShipFail.bind(this)
             }
         });
@@ -77,51 +79,57 @@ cc.Class({
             this.fsm.changePlayerScene()
         });
     },
-    onChangePlayerScene() {
-        cc.log("chuyen player");
+    onEnterplayerScene() {
+        cc.log("hello")
         this.pirate.node.active = false;
         this.mapEnemy.active = false;
         this.mapPlayer.active = false;
-        this.clockEnemy.node.active = false;
         Emitter.instance.emit(EVENT_NAME.YOUR_TURN_PANEL)
         Emitter.instance.registerOnce(EVENT_NAME.YOUR_TURN_PANEL_DONE, () => {
             this.mapEnemy.active = true;
-            this.clockPlayer.node.active = true;
             this.pirate.node.active = true;
-
-            Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
-                data.playerId = this.enemyId;
-                Emitter.instance.emit('checkTile', data);
-                // this.clockPlayer.node.getComponent('ClockController').stopClock();
-            })
+        })
+    },
+    onChangePlayerScene() {
+        cc.log("chuyen player");
+        Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
+            data.playerId = this.enemyId;
+            let spine = this.pirate.node.getComponent(sp.Skeleton)
+            spine.clearTracks()
+            spine.setAnimation(0, "Attack_2", false)
+            spine.addAnimation(0, "Idle", true)
+            Emitter.instance.emit('checkTile', data);
+        })
+    },
+    onEnterenemyScene() {
+        this.pirate.node.active = false;
+        this.mapEnemy.active = false;
+        this.mapPlayer.active = false;
+        Emitter.instance.emit(EVENT_NAME.ENEMY_TURN_PANEL)
+        Emitter.instance.registerOnce(EVENT_NAME.ENEMY_TURN_PANEL_DONE, () => {
+            this.mapPlayer.active = true
+            this.pirate.node.active = true;
         })
     },
     onChangeEnemyScene() {
         cc.log("chuyen enemy");
-        this.pirate.node.active = false;
-        this.mapEnemy.active = false;
-        this.mapPlayer.active = false;
-        this.clockEnemy.node.active = false;
-        this.clockPlayer.node.active = false;
-        Emitter.instance.emit(EVENT_NAME.ENEMY_TURN_PANEL)
-        Emitter.instance.registerOnce(EVENT_NAME.ENEMY_TURN_PANEL_DONE, () => {
-            this.mapPlayer.active = true
-            this.clockEnemy.node.active = true;
-            this.pirate.node.active = true;
-            Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
-                data.playerId = this.playerId;
-                Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
-                cc.log('playerId EnemyScene', data.playerId)
-            })
-            cc.tween(this.node)
-                .call(() => {
-                })
-                .delay(1.5)
-                .call(() => {
-                    // this.clockEnemy.node.getComponent('ClockController').stopClock();
-                    Emitter.instance.emit(EVENT_NAME.CHOOSE_COORDINATES)
-                }).start()
+
+        Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
+            data.playerId = this.playerId;
+            Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
+            cc.log('playerId EnemyScene', data.playerId)
         })
+        cc.tween(this.node)
+            .call(() => {
+            })
+            .delay(3)
+            .call(() => {
+                Emitter.instance.emit(EVENT_NAME.CHOOSE_COORDINATES)
+                let spine = this.pirate.node.getComponent(sp.Skeleton)
+                spine.clearTracks()
+                spine.setAnimation(0, "Attack_2", false)
+                spine.addAnimation(0, "Idle", true)
+            }).start()
     },
     playAnimation(data) {
         cc.log(data)
@@ -135,11 +143,9 @@ cc.Class({
     },
     restTurn() {
         if (this.fsm.state === 'playerScene') {
-            // this.clockPlayer.node.getComponent('ClockController').onEnable();
             this.fsm.changePlayerScene()
         }
         if (this.fsm.state === 'enemyScene') {
-            // this.clockEnemy.node.getComponent('ClockController').onEnable();
             this.fsm.changeEnemyScene()
         }
     },
@@ -159,20 +165,25 @@ cc.Class({
             this._shipEnemyCounter--;
             cc.log(this.__shipEnemyCounter)
             if (this._shipEnemyCounter === 0) {
-                this.onChangeEndScene("YOUR WINS")
+                this.onChangeEndScene(true)
             } else {
                 this.fsm.changePlayerScene()
             }
         } else if (this.fsm.state === 'enemyScene') {
             this._shipPlayerCounter--;
             if (this._shipPlayerCounter === 0) {
-                this.onChangeEndScene("YOUR LOSE CHICKEN")
+                this.onChangeEndScene(false)
             } else {
                 this.fsm.changeEnemyScene()
             }
         }
     },
     onChangeEndScene(data) {
-        cc.log(data)
+        let win = true;
+        if (win === data) {
+            Emitter.instance.emit(EVENT_NAME.WIN)
+        } else {
+            Emitter.instance.emit(EVENT_NAME.LOSE)
+        }
     },
 });

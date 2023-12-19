@@ -4,7 +4,6 @@ let Ship=cc.Class({
     extends: cc.Component,
     properties: {
      length:0,
-     isHorizontal:true,
     },
     ctor(length,isHorizontal) {
        this.length=length;
@@ -18,6 +17,7 @@ let Ship=cc.Class({
         if(this.shipId==null){
             this.shipId=this.generateRandomId();
         }
+        this.isHorizontal=true,
         this.anchorIndex=Math.floor(this.length/2);
         this.positions=[];
         this.creatPos();
