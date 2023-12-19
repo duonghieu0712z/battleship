@@ -162,7 +162,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 623.5382907247958
+      "z": 584.5671475544962
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -302,7 +302,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Login Manager",
+    "_name": "Login Screen",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -604,7 +604,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 296.22,
+      "width": 271.78,
       "height": 44.44
     },
     "_anchorPoint": {
@@ -650,8 +650,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "SINGLER PLAYER",
-    "_N$string": "SINGLER PLAYER",
+    "_string": "SINGLE PLAYER",
+    "_N$string": "SINGLE PLAYER",
     "_fontSize": 40,
     "_lineHeight": 80,
     "_enableWrapText": false,
@@ -823,7 +823,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "\bLoading Manager",
+    "_name": "\bLoading Screen",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -836,7 +836,7 @@
         "__id__": 48
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [],
     "_prefab": null,

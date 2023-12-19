@@ -5,10 +5,10 @@ cc.Class({
 
     properties: {
         yourTurnPanel: cc.Node,
-        xStartYourTurn: -850,
+        xStartYourTurn: -1050,
 
         enemyTurnPanel: cc.Node,
-        xStartEnemyTurn: 850,
+        xStartEnemyTurn: 1050,
 
         circleLoading: cc.Node,
 

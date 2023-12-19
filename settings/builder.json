@@ -15,7 +15,10 @@
     "subContext": ""
   },
   "encryptJs": true,
-  "excludeScenes": [],
+  "excludeScenes": [
+    "f7bd523c-c0d7-4c52-b0f4-a08f23b06f74",
+    "33f6f736-23c4-430a-ab81-c949dc3d31b0"
+  ],
   "fb-instant-games": {},
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
@@ -37,7 +40,7 @@
   },
   "startScene": "71c73086-ef8d-4f0f-90b5-7289ba32aa90",
   "title": "battleship",
-  "webOrientation": "auto",
+  "webOrientation": "landscape",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
     "appid": "wx6ac3f5090a6b99c5",
