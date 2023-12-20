@@ -4,6 +4,20 @@ let Ship=cc.Class({
     extends: cc.Component,
     properties: {
      length:0,
+     isHorizontal: true,
+
+        hideShip: {
+            get() {
+                return this._hideShip;
+            },
+            set(value) {
+                this._hideShip = value;
+                this.shipSprite.node.active = !value;
+            }
+        },
+        shipSprite: cc.Sprite,
+
+        _hideShip: false,
     },
     ctor(length,isHorizontal) {
        this.length=length;
@@ -21,6 +35,9 @@ let Ship=cc.Class({
         this.anchorIndex=Math.floor(this.length/2);
         this.positions=[];
         this.creatPos();
+
+        Emitter.instance.registerEvent('updateLength', this.updateLength.bind(this));
+        Emitter.instance.registerEvent('showShip', this.showShip.bind(this));
     },
     creatPos(){
         for(let i=0;i<this.length;i++){
@@ -72,6 +89,36 @@ this.node.getChildByName("shipSprite").runAction(repeatedAction);
             this.node.rotation=90;
         }
         this.calculatePosition(this.positions[this.anchorIndex].x, this.positions[this.anchorIndex].y,true);
-    }
+    },
+
+    setShipToMap(map, position) {
+        const { row, column } = position;
+        const x = column * 55;
+        const y = -row * 55;
+        const newPos = cc.v2(x, y).add(map.position).add(cc.v2(30, -30));
+
+        this.node.position = newPos;
+        this.node.angle = this.isHorizontal ? 0 : -90;
+    },
+
+    updateLength(shipId, out) {
+        if (this.shipId !== shipId) {
+            return;
+        }
+
+        this.length--;
+        out.length = this.length;
+    },
+
+    showShip(shipId) {
+        if (this.shipId !== shipId) {
+            return;
+        }
+
+        cc.tween(this.node)
+            .delay(3)
+            .call(() => this.hideShip = false)
+            .start();
+    },
 });
 module.exports=Ship;
