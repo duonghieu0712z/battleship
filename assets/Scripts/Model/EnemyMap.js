@@ -39,7 +39,7 @@ cc.Class({
     },
 
     start() {
-        this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        this.changeInteractState(true);
         // this.map[0][0].getComponent("Tile").isShooted = true;
     },
 
@@ -55,7 +55,7 @@ cc.Class({
         let posY = pos.y + 30;
         let stepX = Math.round(posX / 55);
         let stepY = Math.round(posY / 55);
-        cc.log(stepX,stepY)
+        cc.log(stepX, stepY)
         let tile = this.map[stepY * -1][stepX];
         if (tile.getComponent("Tile").isShooted) {
             cc.log("ô này đã bị bắn");
@@ -96,23 +96,23 @@ cc.Class({
             this.addToShipBool(data);
             for (let i = 0; i < data.arrayPos.length; i++) {
                 let tile = this.map[data.arrayPos[i].y][data.arrayPos[i].x];
-                tile.getComponent("Tile").shipId = data.shipId; 
+                tile.getComponent("Tile").shipId = data.shipId;
             }
         }
     },
-    addToShipBool(data){
-        let anchorIndex=Math.floor(data.arrayPos.length/2);
-        let stepX=data.arrayPos[anchorIndex].x;
-        let stepY=data.arrayPos[anchorIndex].y+1;
-        let position=new cc.Vec2(stepX*55+25,stepY*-55+25);
+    addToShipBool(data) {
+        let anchorIndex = Math.floor(data.arrayPos.length / 2);
+        let stepX = data.arrayPos[anchorIndex].x;
+        let stepY = data.arrayPos[anchorIndex].y + 1;
+        let position = new cc.Vec2(stepX * 55 + 25, stepY * -55 + 25);
         cc.log(position);
-        let isHorizontal=true;
-        if(data.arrayPos.length!=1){
-            if(data.arrayPos[anchorIndex].y!=data.arrayPos[anchorIndex-1].y){
-                isHorizontal=false;
+        let isHorizontal = true;
+        if (data.arrayPos.length != 1) {
+            if (data.arrayPos[anchorIndex].y != data.arrayPos[anchorIndex - 1].y) {
+                isHorizontal = false;
             }
         }
-        Emitter.instance.emit("addShipBool", { shipId:data.shipId,length:data.arrayPos.length,position:position,isHorizontal:isHorizontal});
+        Emitter.instance.emit("addShipBool", { shipId: data.shipId, length: data.arrayPos.length, position: position, isHorizontal: isHorizontal });
     },
     checkAvailable(arrayPos) {
         for (let i = 0; i < arrayPos.length; i++) {
@@ -135,7 +135,7 @@ cc.Class({
     checkTile(data) {
         if (this.enemyId == data.playerId) {
             let node = this.map[data.position.y][data.position.x];
-            let targetPosition = node.convertToNodeSpaceAR(cc.v2(0,0));
+            let targetPosition = node.convertToNodeSpaceAR(cc.v2(0, 0));
             let shipId = node.getComponent("Tile").shipId;
             cc.log("enemy ship", shipId);
             Emitter.instance.emit("receiveresult", {
@@ -152,4 +152,11 @@ cc.Class({
                 .start();
         }
     },
+    changeInteractState(isInteract) {
+        if (isInteract) {
+            this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        } else {
+            this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        }
+    }
 });
