@@ -31,10 +31,13 @@ cc.Class({
     playAnimation(data) {
         this.isHit = data.isHit
         this.shipLength = data.shipLength
-
+        cc.log('world vfx',data.worldPosition);
         this.bom = cc.instantiate(this.bomPrefab);
-        this.bom.setParent(this.node.parent.parent.parent)
-        this.bom.position = data.worldPosition
+        let canvas = cc.find("Canvas")
+        this.bom.setParent(canvas)
+        cc.log(this.bom.parent)
+        this.bom.position = canvas.convertToNodeSpaceAR(data.worldPosition)
+        cc.log('canvas vfx',canvas.convertToNodeSpaceAR(data.worldPosition));
         if (this.isHit) {
             let myanimation = this.bom.getComponent(cc.Animation);
             myanimation.play(myanimation.getClips()[0].name)

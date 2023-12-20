@@ -134,10 +134,10 @@ cc.Class({
     playAnimation(data) {
         cc.log(data)
         cc.log("goi hàm playAn")
-        const currentScene = cc.director.getScene();
+        const currentScene = cc.director.getScene().children[0];
         let cannonBall = cc.instantiate(this.ballCannon);
         cannonBall.setParent(currentScene);
-        cannonBall.position = cc.v2(450, 100);
+        cannonBall.position = cc.v2(3, -250);
         Emitter.instance.emit(EVENT_NAME.SOUND_CANON_SHOOT);
         Emitter.instance.emit("attackToPosition", data)
     },
