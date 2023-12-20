@@ -37,11 +37,6 @@ cc.Class({
         this.isDragging = true;
         const worldPos = this.node.parent.convertToNodeSpaceAR(event.getLocation());
         this.offset = this.node.position.sub(worldPos);
-        // let  currentTime = new Date().getTime();
-        // if (currentTime - this.lastTouchTime < this.touchDelay * 1000) {
-        //     this.node.getComponent("Ship").changeRotation();
-        //     this.isDoubleClick=true;
-        // }
     },
 
     onTouchMove(event) {
@@ -103,6 +98,7 @@ cc.Class({
         }else{
             Emitter.instance.emit('setShipId', { positions: this.node.getComponent("Ship").positions, shipId: this.node.getComponent("Ship").shipId });
         }
+        Emitter.instance.emit('checkShipInContainer');
         this.node.getComponent("Ship").playanimOnWater();
     },
     turnOffListener(){

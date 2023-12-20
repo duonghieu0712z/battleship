@@ -39,7 +39,7 @@ cc.Class({
     },
 
     start() {
-        this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        this.changeInteractState(true);
         // this.map[0][0].getComponent("Tile").isShooted = true;
     },
 
@@ -109,4 +109,11 @@ cc.Class({
                 .start();
         }
     },
+    changeInteractState(isInteract) {
+        if (isInteract) {
+            this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        } else {
+            this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        }
+    }
 });

@@ -97,33 +97,33 @@ cc.Class({
                 talkString.string = arrayTalking.SA
                 Emitter.instance.emit(EVENT_NAME.CHANGE_SCENE,false)
             })
-            .call(()=>{
-                this.onAttack();
-            })
             .start()
     },
     onShipFail() {
         cc.log("pirate taking")
-        let talkString = this.node.children[0].children[0].getComponent(cc.Label);
-        let arrayTalking = {GB: "GOOD BOYS", SB: "ENEMY SHIP HAS FAILED", GJ: "GOOD JOBS", SA: "SHOOT AGAIN"};
-        cc.tween(talkString.node)
-            .call(() => {
-                talkString.string = arrayTalking.GB
-            })
-            .delay(1)
-            .call(() => {
-                talkString.string = arrayTalking.SB
-            }).delay(1)
-            .call(() => {
-                talkString.string = arrayTalking.GJ
-            })
-            .delay(1)
-            .call(() => {
-                talkString.string = arrayTalking.SA
-                Emitter.instance.emit(EVENT_NAME.SHIP_FAIL_CHECK)
-                this.onAttack();
-            })
-            .start()
+        Emitter.instance.emit(EVENT_NAME.PLAY_ANI_SHIP_FAIL)
+        Emitter.instance.registerOnce(EVENT_NAME.DONE_CLIP_SHIP_FAIL,()=>{
+            let talkString = this.node.children[0].children[0].getComponent(cc.Label);
+            let arrayTalking = {GB: "GOOD BOYS", SB: "ENEMY SHIP HAS FAILED", GJ: "GOOD JOBS", SA: "SHOOT AGAIN"};
+            cc.tween(talkString.node)
+                .call(() => {
+                    talkString.string = arrayTalking.GB
+                })
+                .delay(1)
+                .call(() => {
+                    talkString.string = arrayTalking.SB
+                }).delay(2)
+                .call(() => {
+                    talkString.string = arrayTalking.GJ
+                })
+                .delay(1)
+                .call(() => {
+                    talkString.string = arrayTalking.SA
+                    Emitter.instance.emit(EVENT_NAME.SHIP_FAIL_CHECK)
+                })
+                .start()
+        })
+
     },
     changeStateShipFail() {
         this.onShipFail();

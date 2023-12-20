@@ -8,13 +8,16 @@ let Ship=cc.Class({
 
         hideShip: {
             get() {
-                return !this.shipSprite.node.active;
+                return this._hideShip;
             },
             set(value) {
+                this._hideShip = value;
                 this.shipSprite.node.active = !value;
             }
         },
         shipSprite: cc.Sprite,
+
+        _hideShip: false,
     },
     ctor(length,isHorizontal) {
        this.length=length;
