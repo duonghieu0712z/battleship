@@ -22,7 +22,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        cc.game.addPersistRootNode(this.node.parent);
+
     },
 
     start () {
