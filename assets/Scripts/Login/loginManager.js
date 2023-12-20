@@ -52,13 +52,12 @@ cc.Class({
         .delay(0.3)
         .to(0.3, { value: 65 })
         .delay(0.3)
-        .to(0.2, { value: 90 })
-        .delay(0.2)
-        .to(1, { value: 100 })
-        .delay(1)
         .call(()=>{
             this.loadMainScene();
         })
+        .to(0.2, { value: 90 })
+        .delay(0.2)
+        .to(1, { value: 100 })
         .start()
 
          cc.tween(this.loadingWaves)

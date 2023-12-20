@@ -17,6 +17,7 @@ cc.Class({
 
     },
     loadTheShip(){
+        Emitter.instance.emit(EVENT_NAME.SOUND_CLICK);
         const allChildren = this.node.children[0].getChildren();
         this.ships = [];
         allChildren.forEach(child => {
