@@ -14,6 +14,8 @@ const eventName = {
     SHIP_FAIL: "SHIP_FAIL",
     SHIP_FAIL_CHECK:"SHIP_FAIL_CHECK",
     START: "START",
+    DONE_CLIP_SHIP_FAIL:"DONE_CLIP_SHIP_FAIL",
+    PLAY_ANI_SHIP_FAIL:"PLAY_ANI_SHIP_FAIL",
     COMPLETE_HIT_SHIP: "complete-hit-ship",
     HIT_SHIP: "hit-ship",
     CHOOSE_COORDINATES: "choose-coordinates",

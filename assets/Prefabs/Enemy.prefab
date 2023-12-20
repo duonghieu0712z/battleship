@@ -22,7 +22,7 @@
       }
     ],
     "_active": true,
-    "_level": 1,
+    "_level": 2,
     "_components": [
       {
         "__id__": 12
@@ -54,8 +54,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 400,
-      "y": 350,
+      "x": -240,
+      "y": -10,
       "z": 0
     },
     "_scale": {
@@ -111,8 +111,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 500,
-      "height": 500
+      "width": 530,
+      "height": 530
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -362,7 +362,7 @@
   },
   {
     "__type__": "cc.Sprite",
-    "_name": "",
+    "_name": "EnemyMapContainer<Sprite>",
     "_objFlags": 0,
     "node": {
       "__id__": 2
@@ -376,7 +376,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "d4d91855-9152-4049-98a6-2e7b50b2e5e7"
+      "__uuid__": "209683cb-c2d2-4a00-a48e-62cfa3d88ef3"
     },
     "_type": 1,
     "_sizeMode": 0,
