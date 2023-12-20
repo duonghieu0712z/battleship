@@ -1,7 +1,5 @@
 const Emitter = require("EventEmitter");
 
-const Ship = require("Ship");
-
 cc.Class({
     extends: cc.Component,
 
@@ -18,24 +16,26 @@ cc.Class({
         this.enemyId = null;
         this.creatMap();
 
-        const onSetEnemyShipPos = this.setShip.bind(this);
-        Emitter.instance.registerEvent("set-enemy-ship-pos", onSetEnemyShipPos);
-
         Emitter.instance.registerEvent("checkTile", this.checkTile.bind(this));
 
         Emitter.instance.registerEvent(
             "setEnemyId",
-            (enemyId) => (this.enemyId = enemyId),
+            (enemyId) => (this.enemyId = enemyId)
         );
 
         Emitter.instance.registerEvent("log-enemy-map", () =>
             cc.log(
                 "random ship",
                 this.map.map((row) =>
-                    row.map((tile) => tile.getComponent("Tile").shipId),
-                ),
-            ),
+                    row.map((tile) => tile.getComponent("Tile").shipId)
+                )
+            )
         );
+
+        const autoMap = this.getComponent('AutoLoadMap');
+        if (autoMap) {
+            autoMap.setMap(this.map);
+        }
     },
 
     start() {
@@ -55,7 +55,6 @@ cc.Class({
         let posY = pos.y + 30;
         let stepX = Math.round(posX / 55);
         let stepY = Math.round(posY / 55);
-        cc.log(stepX,stepY)
         let tile = this.map[stepY * -1][stepX];
         if (tile.getComponent("Tile").isShooted) {
             cc.log("ô này đã bị bắn");
@@ -90,56 +89,10 @@ cc.Class({
         }
     },
 
-    setShip(data) {
-        data.isSuccess = this.checkAvailable(data.arrayPos);
-        if (data.isSuccess) {
-            this.addToShipBool(data);
-            for (let i = 0; i < data.arrayPos.length; i++) {
-                let tile = this.map[data.arrayPos[i].y][data.arrayPos[i].x];
-                tile.getComponent("Tile").shipId = data.shipId; 
-            }
-        }
-    },
-    addToShipBool(data){
-        let anchorIndex=Math.floor(data.arrayPos.length/2);
-        let stepX=data.arrayPos[anchorIndex].x;
-        let stepY=data.arrayPos[anchorIndex].y+1;
-        let position=new cc.Vec2(stepX*55+25,stepY*-55+25);
-        let isHorizontal=true;
-        if(data.arrayPos.length!=1){
-            if(data.arrayPos[anchorIndex].y!=data.arrayPos[anchorIndex-1].y){
-                isHorizontal=false;
-            }
-        }
-
-        const ship = data.ship;
-        ship.node.position=position;
-        if(!ship.isHorizontal){
-            ship.node.angle = -90;
-        }
-    },
-    checkAvailable(arrayPos) {
-        for (let i = 0; i < arrayPos.length; i++) {
-            if (
-                arrayPos[i].y < 0 ||
-                arrayPos[i].y >= this.rows ||
-                arrayPos[i].x < 0 ||
-                arrayPos[i].x >= this.rows
-            ) {
-                return false;
-            }
-            let tile = this.map[arrayPos[i].y][arrayPos[i].x];
-            if (tile.getComponent("Tile").shipId != null) {
-                return false;
-            }
-        }
-        return true;
-    },
-
     checkTile(data) {
         if (this.enemyId == data.playerId) {
             let node = this.map[data.position.y][data.position.x];
-            let targetPosition = node.convertToNodeSpaceAR(cc.v2(0,0));
+            let targetPosition = node.convertToNodeSpaceAR(cc.v2(0, 0));
             let shipId = node.getComponent("Tile").shipId;
             cc.log("enemy ship", shipId);
             Emitter.instance.emit("receiveresult", {

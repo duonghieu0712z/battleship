@@ -6,7 +6,15 @@ let Ship=cc.Class({
      length:0,
      isHorizontal: true,
 
-     shipSprite: cc.Sprite,
+        hideShip: {
+            get() {
+                return !this.shipSprite.node.active;
+            },
+            set(value) {
+                this.shipSprite.node.active = !value;
+            }
+        },
+        shipSprite: cc.Sprite,
     },
     ctor(length,isHorizontal) {
        this.length=length;
@@ -80,26 +88,34 @@ this.node.getChildByName("shipSprite").runAction(repeatedAction);
         this.calculatePosition(this.positions[this.anchorIndex].x, this.positions[this.anchorIndex].y,true);
     },
 
+    setShipToMap(map, position) {
+        const { row, column } = position;
+        const x = column * 55;
+        const y = -row * 55;
+        const newPos = cc.v2(x, y).add(map.position).add(cc.v2(30, -30));
+
+        this.node.position = newPos;
+        this.node.angle = this.isHorizontal ? 0 : -90;
+    },
+
     updateLength(shipId, out) {
         if (this.shipId !== shipId) {
             return;
         }
 
         this.length--;
-        cc.log(this.length)
         out.length = this.length;
     },
 
     showShip(shipId) {
-        cc.log('show ship', shipId)
         if (this.shipId !== shipId) {
             return;
         }
 
         cc.tween(this.node)
             .delay(3)
-            .call(() => this.shipSprite.node.active = true)
+            .call(() => this.hideShip = false)
             .start();
-    }
+    },
 });
 module.exports=Ship;

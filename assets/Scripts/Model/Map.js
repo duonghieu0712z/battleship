@@ -3,8 +3,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        rows: 9,
-        cols: 9,
+        rows: 8,
+        cols: 8,
         tilePrefab: cc.Prefab,
         selectedTiles: [cc.Node],
     },

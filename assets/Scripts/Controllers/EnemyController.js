@@ -43,6 +43,8 @@ cc.Class({
 
     start() {
         Emitter.instance.emit("setEnemyId", this.enemyId);
+        Emitter.instance.emit("random-ships");
+        Emitter.instance.emit("log-enemy-map");
     },
 
     chooseCoordinates() {

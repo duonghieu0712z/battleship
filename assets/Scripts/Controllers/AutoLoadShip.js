@@ -7,17 +7,14 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        mapContainer: cc.Node,
+        map: cc.Node,
         ships: [Ship],
     },
 
     onLoad() {
-        // const onRandomShips = this.onRandomShips.bind(this);
-        // Emitter.instance.registerOnce("random-enemy-ship", onRandomShips);
-    },
-
-    start() {
-        this.onRandomShips();
-        Emitter.instance.emit("log-enemy-map");
+        const onRandomShips = this.onRandomShips.bind(this);
+        Emitter.instance.registerOnce("random-ships", onRandomShips);
     },
 
     onRandomShips() {
@@ -27,17 +24,23 @@ cc.Class({
     },
 
     onRandomShip(ship) {
+        ship.node.parent = this.mapContainer;
         ship.isHorizontal = Math.random() < 0.5;
 
-        const data = { isSuccess: false };
-        do {
+        while (true) {
             const pos = randomPosition(8, 8);
             ship.calculatePosition(pos.column, pos.row, false);
 
-            data.ship = ship;
-            data.arrayPos = ship.positions;
-            data.shipId = ship.shipId;
-            Emitter.instance.emit("set-enemy-ship-pos", data);
-        } while (!data.isSuccess);
+            const autoMap = this.map.getComponent("AutoLoadMap");
+            const isAvailable = autoMap.checkAvailable(ship.positions);
+            if (isAvailable) {
+                autoMap.setShip({
+                    shipId: ship.shipId,
+                    arrayPos: ship.positions,
+                });
+                ship.setShipToMap(this.map, pos);
+                break;
+            }
+        }
     },
 });
