@@ -1,4 +1,3 @@
-
 const Emitter = require("EventEmitter");
 const EVENT_NAME = require("NAME_EVENT");
 cc.Class({
@@ -7,11 +6,21 @@ cc.Class({
     properties: {
         mainMusic: cc.AudioSource,
         sounds: [cc.AudioSource],
+
+
     },
+
+    // onEnable(){
+    //     this.mainMusic.play();
+    // },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+
+    },
+
+    start () {
         var _canonShoot = this.canonShoot.bind(this);
         var _explosion = this.explosion.bind(this);
         var _shootWater = this.shootWater.bind(this);
@@ -20,10 +29,6 @@ cc.Class({
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_SHOOT_WATER, _shootWater);
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_EXPLOSION, _explosion);
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_CLICK, _click);
-    },
-
-    start () {
-        this.mainMusic.play();
     },
 
     canonShoot(){
@@ -40,9 +45,12 @@ cc.Class({
 
     click(){
         this.playSound('click');
+        cc.log('click');
     },
 
-    // update (dt) {},
+    update (dt) {
+        cc.log(this.node.active);
+    },
 
     playSound(name){
         this.sounds.forEach(element => {
@@ -55,6 +63,7 @@ cc.Class({
 
     changeMusicVolume(volume){
         this.mainMusic.volume = volume;
+        cc.log(this.mainMusic.volume);
     },
 
     changeSoundsVolume(volume){
