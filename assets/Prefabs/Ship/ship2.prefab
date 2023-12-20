@@ -281,19 +281,16 @@
     "sync": false
   },
   {
-    "__type__": "306811SyINK4YlworkZ43RU",
+    "__type__": "ec274RAA99FIYdwpCtqqTID",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "length": 2,
-    "isHorizontal": true,
     "shipSprite": {
-      "__id__": 6
+      "__id__": 5
     },
-    "_hideShip": false,
     "_id": ""
   },
   {
