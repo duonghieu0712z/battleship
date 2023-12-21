@@ -77,6 +77,7 @@ cc.Class({
                 cc.rotateTo(3, 180),
                 cc.callFunc(()=>{
                     this.loadingLabel.string = 'WAITING ENEMY';
+                    Emitter.instance.emit(EVENT_NAME.SOUND_LOADING, true);
                 })
             ),
             cc.spawn(
@@ -89,6 +90,7 @@ cc.Class({
                 this.circleLoading.rotation = 0;
                 this.circleLoading.parent.active = false;
                 Emitter.instance.emit(EVENT_NAME.WAIT_FOR_ENEMY_DONE)
+                Emitter.instance.emit(EVENT_NAME.SOUND_LOADING, false);
             })
         )
         this.circleLoading.runAction(action);
