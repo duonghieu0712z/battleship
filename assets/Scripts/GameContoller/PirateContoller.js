@@ -95,7 +95,7 @@ cc.Class({
             .delay(1)
             .call(() => {
                 talkString.string = arrayTalking.SA
-                Emitter.instance.emit(EVENT_NAME.CHANGE_SCENE,false)
+                Emitter.instance.emit(EVENT_NAME.RESET_TURN)
             })
             .start()
     },

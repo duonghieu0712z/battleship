@@ -31,8 +31,10 @@ cc.Class({
         cc.log(Emitter)
         this.playerId = 0;
         this.enemyId = 1;
-        this._shipPlayerCounter = 4
-        this._shipEnemyCounter = 4
+        this.shipPlayerCounter = 4;
+        this.shipEnemyCounter = 4;
+        this.oldPosition = this.mapPlayer.position;
+        this.scalePositionMiniMap = cc.v2(540, 200);
         Emitter.instance.registerOnce('setEnemyId', (enemyId) => {
             this.enemyId = enemyId;
         })
@@ -87,7 +89,16 @@ cc.Class({
         Emitter.instance.emit(EVENT_NAME.YOUR_TURN_PANEL)
         Emitter.instance.registerOnce(EVENT_NAME.YOUR_TURN_PANEL_DONE, () => {
             this.mapEnemy.active = true;
+            this.mapPlayer.active = true;
             this.pirate.node.active = true;
+            this.changeToMiniMap(this.mapPlayer)
+            let childrenArray = this.mapPlayer.children;
+            /*            childrenArray.forEach(e => {
+                            if (e.name === 'ship') {
+                                e.active = false;
+                            }
+                        })*/
+            this.changeToRealMap(this.mapEnemy, false);
         })
     },
     onChangePlayerScene() {
@@ -107,13 +118,15 @@ cc.Class({
         this.mapPlayer.active = false;
         Emitter.instance.emit(EVENT_NAME.ENEMY_TURN_PANEL)
         Emitter.instance.registerOnce(EVENT_NAME.ENEMY_TURN_PANEL_DONE, () => {
-            this.mapPlayer.active = true
+            this.changeToMiniMap(this.mapEnemy)
+            this.mapPlayer.active = true;
+            this.mapEnemy.active = true;
             this.pirate.node.active = true;
+            this.changeToRealMap(this.mapPlayer, true);
         })
     },
     onChangeEnemyScene() {
         cc.log("chuyen enemy");
-
         Emitter.instance.registerOnce(EVENT_NAME.POSITION, (data) => {
             data.playerId = this.playerId;
             Emitter.instance.emit(EVENT_NAME.CHECK_POSITION, data)
@@ -132,8 +145,8 @@ cc.Class({
             }).start()
     },
     playAnimation(data) {
-        cc.log(data)
-        cc.log("goi hàm playAn")
+        //cc.log(data)
+        //cc.log("goi hàm playAn")
         const currentScene = cc.director.getScene().children[0];
         let cannonBall = cc.instantiate(this.ballCannon);
         cannonBall.setParent(currentScene);
@@ -144,34 +157,35 @@ cc.Class({
     restTurn() {
         if (this.fsm.state === 'playerScene') {
             this.fsm.changePlayerScene()
+            cc.log("reset")
         }
         if (this.fsm.state === 'enemyScene') {
             this.fsm.changeEnemyScene()
         }
     },
     changeScene(data) {
-        cc.log("map quái: " + this.mapEnemy.active)
-        if (this.mapEnemy.active === data) {
+        cc.log('data trong change scene', data)
+        //cc.log("map quái: " + this.mapEnemy.active)
+        let nowScene = this.fsm.state;
+        if (nowScene === 'playerScene' && data === true) {
             cc.log("đổi enemy")
             this.fsm.changeEnemyScene()
-        } else {
+        } else if (nowScene === 'enemyScene' && data === true) {
             cc.log("đổi player")
             this.fsm.changePlayerScene()
         }
-
     },
     changeSceneShipFail() {
         if (this.fsm.state === 'playerScene') {
-            this._shipEnemyCounter--;
-            cc.log(this.__shipEnemyCounter)
-            if (this._shipEnemyCounter === 0) {
+            this.shipEnemyCounter -= 1;
+            if (this.shipEnemyCounter === 0) {
                 this.onChangeEndScene(true)
             } else {
                 this.fsm.changePlayerScene()
             }
         } else if (this.fsm.state === 'enemyScene') {
-            this._shipPlayerCounter--;
-            if (this._shipPlayerCounter === 0) {
+            this.shipPlayerCounter -= 1;
+            if (this.shipPlayerCounter === 0) {
                 this.onChangeEndScene(false)
             } else {
                 this.fsm.changeEnemyScene()
@@ -184,6 +198,25 @@ cc.Class({
             Emitter.instance.emit(EVENT_NAME.WIN)
         } else {
             Emitter.instance.emit(EVENT_NAME.LOSE)
+        }
+    },
+    changeToMiniMap(map) {
+        cc.log(map)
+        map.scale = 0.4;
+        map.position = this.scalePositionMiniMap
+        map.opacity = 200;
+    },
+    changeToRealMap(map, isShowShip) {
+        map.scale = 1;
+        map.position = this.oldPosition
+        map.opacity = 255;
+        if (isShowShip === true) {
+            let childrenArray = this.mapPlayer.children;
+            childrenArray.forEach(e => {
+                if (e.name === 'ship') {
+                    e.active = true;
+                }
+            })
         }
     },
 });
