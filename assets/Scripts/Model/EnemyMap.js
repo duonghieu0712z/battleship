@@ -49,7 +49,37 @@ cc.Class({
         let touchPosLocal = this.node.convertToNodeSpaceAR(touchPosGlobal);
         this.convertPosition(touchPosLocal);
     },
-
+    onMouseEnter(event) {
+        this.clearHover();
+        // console.log('Mouse entered!');
+        this.hoverAction(event);
+    },
+    onMouseMove(event){
+        // console.log('Mouse move!');
+       this.hoverAction(event);
+    },
+    onMouseLeave(event) {
+        // console.log('Mouse left!');
+       this.clearHover();
+    },
+    hoverAction(event){
+        this.clearHover();
+        let touchPosGlobal = event.getLocation();
+        let touchPosLocal = this.node.convertToNodeSpaceAR(touchPosGlobal);
+        let posX = touchPosLocal.x - 30;
+        let posY = touchPosLocal.y + 30;
+        let stepX = Math.round(posX / 55);
+        let stepY = Math.round(posY / 55);
+        let tile = this.map[stepY * -1][stepX];
+        tile.getComponent("Tile").setHover(true);
+    },
+    clearHover(){
+        this.map.forEach(rows => {
+            rows.forEach(element=>{
+                element.getComponent("Tile").setHover(false);
+            })
+        });
+    },
     convertPosition(pos) {
         let posX = pos.x - 30;
         let posY = pos.y + 30;
@@ -155,8 +185,14 @@ cc.Class({
     changeInteractState(isInteract) {
         if (isInteract) {
             this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+            this.node.on(cc.Node.EventType.MOUSE_ENTER, this.onMouseEnter, this);
+            this.node.on(cc.Node.EventType.MOUSE_MOVE, this.onMouseMove,this);
+            this.node.on(cc.Node.EventType.MOUSE_LEAVE, this.onMouseLeave, this);
         } else {
             this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+            this.node.off(cc.Node.EventType.MOUSE_ENTER, this.onMouseEnter, this);
+            this.node.off(cc.Node.EventType.MOUSE_MOVE, this.onMouseMove,this);
+            this.node.off(cc.Node.EventType.MOUSE_LEAVE, this.onMouseLeave, this);
         }
     }
 });

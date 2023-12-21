@@ -3,6 +3,7 @@ cc.Class({
 
     properties: {
         cover:cc.Node,
+        hover:cc.Node,
         activeColor:cc.Color,
         effect:[cc.Prefab],
         shipId:null,
@@ -24,6 +25,13 @@ cc.Class({
             effect=cc.instantiate(this.effect[1]);
         }
         effect.parent=this.node;
+    },
+    setHover(isHover){
+        if(isHover){
+            this.hover.active=true;
+         }else{
+            this.hover.active=false;
+         }
     },
     changeState(){
         if(this.shipId==null){
