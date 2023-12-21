@@ -6405,7 +6405,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "loading\u001c",
+    "_name": "loading",
     "_objFlags": 0,
     "_parent": {
       "__id__": 162
