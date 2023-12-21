@@ -44,9 +44,16 @@ cc.Class({
         this.playSound('click');
     },
 
-    loading(data){
-        if(data) this.playSound('loading');
-        else this.stopSound('loading');
+    loading(){
+        this.playSound('loading');
+        this.node.runAction(
+            cc.sequence(
+                cc.delayTime(4),
+                cc.callFunc(()=>{
+                    this.stopSound('loading');
+                })
+            ),
+        )
     },
 
     // update (dt) {},
