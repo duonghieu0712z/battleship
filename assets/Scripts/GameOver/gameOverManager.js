@@ -34,4 +34,8 @@ cc.Class({
     openLosePanel(){
         this.losePanel.active = true;
     },
+
+    restart(){
+        cc.director.loadScene("loginScene");
+    }
 });

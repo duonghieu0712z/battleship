@@ -26,6 +26,11 @@ cc.Class({
 
     start () {
         this.mainMusic.play();
+        this.changeMusicVolume(cc.sys.localStorage.getItem('mainMusicVolume'));
+        this.sounds.forEach(element => {
+            const soundsKey = element.node.name + 'Volume';
+            element.volume = cc.sys.localStorage.getItem(soundsKey);
+        });
     },
 
     canonShoot(){
@@ -78,11 +83,14 @@ cc.Class({
     
     changeMusicVolume(volume){
         this.mainMusic.volume = volume;
+        cc.sys.localStorage.setItem('mainMusicVolume', volume);
     },
 
     changeSoundsVolume(volume){
         this.sounds.forEach(element => {
             element.volume = volume;
+            const soundsKey = element.node.name + 'Volume';
+            cc.sys.localStorage.setItem(soundsKey, volume);
         });
     }
 });
