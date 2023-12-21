@@ -30,8 +30,6 @@ cc.Class({
         this.node.getComponent(cc.Sprite).spriteFrame = this.bomSprite;
     },
     onAttack(data) {
-        cc.log('world',data.worldPosition);
-        cc.log('canvas',this.node.convertToNodeSpaceAR(data.worldPosition));
         cc.tween(this.node)
             .delay(0.94)
             .parallel(

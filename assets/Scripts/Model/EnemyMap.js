@@ -55,6 +55,9 @@ cc.Class({
         let posY = pos.y + 30;
         let stepX = Math.round(posX / 55);
         let stepY = Math.round(posY / 55);
+        if (stepY*-1 < 0 ||stepY*-1 >= 8 || stepX < 0 ||stepX >= 8) {
+            return;
+        }
         let tile = this.map[stepY * -1][stepX];
         if (tile.getComponent("Tile").isShooted) {
             cc.log("ô này đã bị bắn");

@@ -116,7 +116,7 @@ this.node.getChildByName("shipSprite").runAction(repeatedAction);
         }
 
         cc.tween(this.node)
-            .delay(3)
+            .delay(5)
             .call(() => this.hideShip = false)
             .start();
     },
