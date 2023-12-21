@@ -7,6 +7,12 @@ cc.Class({
         winPanel: cc.Node,
 
         losePanel: cc.Node,
+
+        loadingScene: cc.Node,
+
+        loadingWaves: cc.Node,
+
+        yEnd: 280,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -23,19 +29,40 @@ cc.Class({
         this.winPanel.active = false;
 
         this.losePanel.active = false;
+
+        this.loadingScene.active = false;
     },
 
     // update (dt) {},
 
     openWinPanel(){
         this.winPanel.active = true;
+        this.scheduleOnce(function() {
+            this.loading();
+        }, 10);
+    
     },
 
     openLosePanel(){
         this.losePanel.active = true;
+        this.scheduleOnce(function() {
+            this.loading();
+        }, 10);
     },
 
     restart(){
-        cc.director.loadScene("loginScene");
-    }
+        cc.director.loadScene("logInScene");
+    },
+
+    loading() {
+        this.loadingScene.active = true;
+
+         cc.tween(this.loadingWaves)
+        .to(5.2, { y: this.yEnd })
+        .call(()=>{
+            this.restart();
+        })
+        .start()
+    },
+
 });

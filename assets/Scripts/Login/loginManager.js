@@ -10,6 +10,8 @@ cc.Class({
         loadingScene: cc.Node,
         loadingWaves: cc.Node,
 
+        loginMusic: cc.AudioSource,
+
         yStart: 40,
 
         yEnd: 280,
@@ -21,11 +23,14 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        
+    },
 
     start() {
         this.loginScene.active = true;
         this.loadingScene.active = false;
+        this.loginMusic.volume = cc.sys.localStorage.getItem('mainMusicVolume');
     },
 
     update(dt) {
