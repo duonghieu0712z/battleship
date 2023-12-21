@@ -4,9 +4,10 @@ cc.Class({
 
     properties: {
        startButton:cc.Button,
+       allShip:[cc.Node]
     },
     onLoad () {
-
+        this.loadAllShip();
     },
 
     start () {
@@ -14,11 +15,23 @@ cc.Class({
         Emitter.instance.registerEvent("checkShipInContainer", this.checkShipInContainer.bind(this));
     },
     checkShipInContainer(){
-        let allChildren = this.node.getChildren();
-       if(allChildren.length==0){
+        let availableCount=0;
+        for(let index=0;index<this.allShip.length;index++){
+            cc.log(this.allShip[index].getComponent("dradropGameObject").isAvailable);
+           if(this.allShip[index].getComponent("dradropGameObject").isAvailable){
+            availableCount++;
+           }
+        }
+       if(availableCount==4){
         this.startButton.interactable=true;
        }else{
         this.startButton.interactable=false;
+       }
+    },
+    loadAllShip(){
+       let allChildren=this.node.getChildren();
+       for(let index=0;index<allChildren.length;index++){
+        this.allShip.push(allChildren[index]);
        }
     }
 });
