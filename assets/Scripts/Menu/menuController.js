@@ -39,13 +39,14 @@ cc.Class({
         this.mainMenu.active = true;
         this.mainMenuButton.active = false;
         this.soundButton();
-        cc.director.setTimeScale = 0;
+        cc.director.pause();
     },
 
     closeMainMenu(){
         this.mainMenu.active = false;
         this.mainMenuButton.active = true;
         this.soundButton();
+        cc.director.resume();
     },
 
     openSetting(){
@@ -66,6 +67,11 @@ cc.Class({
     closeHelpInfo(){
         this.helpInfo.active = false;
         this.soundButton();
+    },
+
+    newGame(){
+        cc.director.resume();
+        cc.director.loadScene("mainScene");
     },
 
     soundButton(){
