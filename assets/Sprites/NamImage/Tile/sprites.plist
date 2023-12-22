@@ -4,10 +4,24 @@
 	<dict>
 		<key>frames</key>
 		<dict>
+			<key>fire.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{421,560}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{7,9},{421,560}}</string>
+				<key>sourceSize</key>
+				<string>{433,576}</string>
+			</dict>
+
 			<key>pngtree-white-note-paper-png-image_9429866.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,0},{237,257}}</string>
+				<string>{{0,561},{237,257}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -21,7 +35,7 @@
 			<key>seamless_cartoon_styled_water_texture_by_berserkitty_dcatyft-fullview.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,258},{171,171}}</string>
+				<string>{{0,819},{171,171}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -39,7 +53,7 @@
 			<key>format</key>
 			<integer>2</integer>
 			<key>size</key>
-			<string>{256,512}</string>
+			<string>{512,1024}</string>
 			<key>textureFileName</key>
 			<string>sprites.png</string>
 			</dict>
