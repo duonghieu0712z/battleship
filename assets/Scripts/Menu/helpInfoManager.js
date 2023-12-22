@@ -47,7 +47,7 @@ cc.Class({
     },
 
     checkButton(){
-        if(this.pageIndex >= 5){
+        if(this.pageIndex >= 6){
             this.rightButton.active = false;
         }
         else if(this.pageIndex <= 1)
