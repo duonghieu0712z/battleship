@@ -39,7 +39,7 @@ cc.Class({
         this.winPanel.active = true;
         this.scheduleOnce(function() {
             this.loading();
-        }, 10);
+        }, 5);
     
     },
 
@@ -47,7 +47,7 @@ cc.Class({
         this.losePanel.active = true;
         this.scheduleOnce(function() {
             this.loading();
-        }, 10);
+        }, 5);
     },
 
     restart(){
