@@ -10,8 +10,6 @@ cc.Class({
         loadingScene: cc.Node,
         loadingWaves: cc.Node,
 
-        loginMusic: cc.AudioSource,
-
         yStart: 40,
 
         yEnd: 280,
@@ -30,7 +28,6 @@ cc.Class({
     start() {
         this.loginScene.active = true;
         this.loadingScene.active = false;
-        this.loginMusic.volume = cc.sys.localStorage.getItem('mainMusicVolume');
     },
 
     update(dt) {
@@ -45,7 +42,6 @@ cc.Class({
         this.loginScene.active = false;
         this.loadingScene.active = true;
 
-        var percentY = (this.yEnd - this.yStart) / 100;
 
         cc.tween(percent)
         .delay(0.5)
