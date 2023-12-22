@@ -108,6 +108,9 @@ cc.Class({
         .delay(3)
         .call(()=>{
             node.getComponent("Tile").changeState();
+            if(shipId!=null){
+                Emitter.instance.emit('spawnEffects',{position:node.position,shipId:shipId});
+            }
         }).start()
        }
     }, 
