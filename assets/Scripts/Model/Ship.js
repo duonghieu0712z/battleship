@@ -17,6 +17,7 @@ let Ship=cc.Class({
         },
 
         _hideShip: false,
+        shipSprite: cc.Sprite,
     },
     ctor(length,isHorizontal) {
        this.length=length;
