@@ -15,5 +15,6 @@ cc.Class({
         let effect=cc.instantiate(this.fireEffect);
         effect.parent=this.node;
         effect.position=data.position;
+        Emitter.instance.emit("addEffects",{shipId:data.shipId,effect:effect});
     }
 });

@@ -109,7 +109,7 @@ cc.Class({
         .call(()=>{
             node.getComponent("Tile").changeState();
             if(shipId!=null){
-                Emitter.instance.emit('spawnEffects',{position:node.position});
+                Emitter.instance.emit('spawnEffects',{position:node.position,shipId:shipId});
             }
         }).start()
        }

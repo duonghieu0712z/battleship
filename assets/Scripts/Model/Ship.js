@@ -15,7 +15,6 @@ let Ship=cc.Class({
                 this.shipSprite.node.active = !value;
             }
         },
-        shipSprite: cc.Sprite,
 
         _hideShip: false,
     },
