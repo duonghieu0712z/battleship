@@ -23,6 +23,7 @@ cc.Class({
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_CLICK, _click);
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_LOADING, _loading);
         this.changeSoundsVolume(1);
+        this.changeMusicVolume(1);
     },
 
     start () {
