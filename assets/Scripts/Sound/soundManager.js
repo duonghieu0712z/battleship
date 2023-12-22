@@ -22,16 +22,12 @@ cc.Class({
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_EXPLOSION, _explosion);
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_CLICK, _click);
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_LOADING, _loading);
-        this.changeSoundsVolume(1);
     },
 
     start () {
         this.mainMusic.play();
         this.changeMusicVolume(cc.sys.localStorage.getItem('mainMusicVolume'));
-        this.sounds.forEach(element => {
-            const soundsKey = element.node.name + 'Volume';
-            element.volume = cc.sys.localStorage.getItem(soundsKey);
-        });
+        this.changeSoundsVolume(cc.sys.localStorage.getItem('soundsVolume'));  
     },
 
     canonShoot(){
@@ -88,10 +84,10 @@ cc.Class({
     },
 
     changeSoundsVolume(volume){
+        cc.sys.localStorage.setItem('soundsVolume', volume);
         this.sounds.forEach(element => {
             element.volume = volume;
-            const soundsKey = element.node.name + 'Volume';
-            cc.sys.localStorage.setItem(soundsKey, volume);
         });
-    }
+    },
+
 });
