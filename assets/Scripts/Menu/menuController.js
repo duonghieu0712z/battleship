@@ -30,9 +30,10 @@ cc.Class({
         this.setting.active = false;
         this.helpInfo.active = false;
         this._soundManager = this.soundManager.getComponent('soundManager');
+        this.updateSlider();
     },
     update (dt) {
-        //this.node.parent.setSiblingIndex(this.node.parent.parent.childrenCount - 1);
+
     },
 
     openMainMenu(){
@@ -71,21 +72,29 @@ cc.Class({
 
     newGame(){
         cc.director.resume();
+        this.closeMainMenu();
         cc.director.loadScene("mainScene");
+        // this._soundManager.reloadEvents();
     },
 
     soundButton(){
-        Emitter.instance.emit(EVENT_NAME.SOUND_CLICK);
+        this._soundManager.click();
     },
 
     changeMusicVolume(){
         this._soundManager.changeMusicVolume(this.musicSlider.progress);
-        // Setting.setMusicVolume(this.musicSlider.progress);
         this.musicSlider.node.getChildByName('Music ProgressBar').getComponent(cc.ProgressBar).progress = this.musicSlider.progress;
     },
 
     changeSoundsVolume(){
         this._soundManager.changeSoundsVolume(this.soundsSlider.progress);
         this.soundsSlider.node.getChildByName('Sound ProgressBar').getComponent(cc.ProgressBar).progress = this.soundsSlider.progress;
+    },
+
+    updateSlider(){
+        this.musicSlider.progress = cc.sys.localStorage.getItem('mainMusicVolume');
+        this.soundsSlider.progress = cc.sys.localStorage.getItem('soundsVolume');
+        this.changeMusicVolume();
+        this.changeSoundsVolume();
     },
 });
