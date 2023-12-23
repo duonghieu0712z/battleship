@@ -5,7 +5,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        shipFailVideo: cc.VideoPlayer,
+        shipFailVideo: cc.Animation,
     },
 
     onLoad() {
@@ -13,20 +13,18 @@ cc.Class({
             EVENT_NAME.PLAY_ANI_SHIP_FAIL,
             this.playClip.bind(this)
         );
-        this.shipFailVideo.node.on("completed", this.onVideoCompleted, this);
-
-        cc.log("hello clip");
+        this.animation = this.shipFailVideo.node.getComponent(cc.Animation);
+        this.animation.on("finished", this.onAnimationFinished, this);
     },
 
     playClip() {
-        console.log("gfdd");
-        Emitter.instance.emit(EVENT_NAME.SOUND_SHIP_SANK);
         this.shipFailVideo.node.active = true;
-        this.shipFailVideo.play();
+        let myanimation = this.shipFailVideo.node.getComponent(cc.Animation);
+        myanimation.play(myanimation.getClips()[0].name);
+        cc.log("hello clip");
     },
 
-    onVideoCompleted() {
-        cc.log("hello");
+    onAnimationFinished() {
         this.shipFailVideo.node.active = false;
         Emitter.instance.emit(EVENT_NAME.DONE_CLIP_SHIP_FAIL);
     },
