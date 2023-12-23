@@ -177,7 +177,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 344.6781107062066
+      "z": 465.05564183224357
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -1492,7 +1492,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 757.28,
-      "height": 100.8
+      "height": 77.78
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1539,11 +1539,11 @@
     "_useOriginalSize": false,
     "_string": "ATTACK",
     "_N$string": "ATTACK",
-    "_fontSize": 70,
+    "_fontSize": 65,
     "_lineHeight": 80,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "0043766f-d50a-4613-8833-b55c009bfddc"
+      "__uuid__": "61e0147d-2f86-4303-b8ff-39823c650639"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
@@ -8506,7 +8506,7 @@
     "_lineHeight": 100,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "17384ba9-843a-46a4-8ef4-88f7400ec76f"
+      "__uuid__": "61e0147d-2f86-4303-b8ff-39823c650639"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
@@ -14952,7 +14952,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 300,
-      "height": 90.39999999999999
+      "height": 88.89
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -14997,13 +14997,15 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "Kéo và thả tàu vào map",
-    "_N$string": "Kéo và thả tàu vào map",
+    "_string": "KÉ\bO VÀ THẢ TÀU VÀO MAP",
+    "_N$string": "KÉ\bO VÀ THẢ TÀU VÀO MAP",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 80,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "61e0147d-2f86-4303-b8ff-39823c650639"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 0,
@@ -15230,7 +15232,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 300,
-      "height": 170.39999999999998
+      "height": 177.78
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -15275,13 +15277,15 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "Các tàu đè lên nhau thì sẽ không để được tàu",
-    "_N$string": "Các tàu đè lên nhau thì sẽ không để được tàu",
+    "_string": "CÁC TÀU ĐÈ LÊN NHAU THÌ SẼ KHÔNG ĐỂ ĐƯỢC TÀU.",
+    "_N$string": "CÁC TÀU ĐÈ LÊN NHAU THÌ SẼ KHÔNG ĐỂ ĐƯỢC TÀU.",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 80,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "61e0147d-2f86-4303-b8ff-39823c650639"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 0,
@@ -15508,7 +15512,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 300,
-      "height": 170.39999999999998
+      "height": 222.22
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -15553,13 +15557,15 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "Các tàu đặt có phần nằm ngoài map cũng không để được tàu.",
-    "_N$string": "Các tàu đặt có phần nằm ngoài map cũng không để được tàu.",
+    "_string": "CÁC TÀU ĐẶT CÓ PHẦN NẰM NGOÀI MAP CŨNG KHÔNG ĐỂ ĐƯỢC TÀU.",
+    "_N$string": "CÁC TÀU ĐẶT CÓ PHẦN NẰM NGOÀI MAP CŨNG KHÔNG ĐỂ ĐƯỢC TÀU.",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 80,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "61e0147d-2f86-4303-b8ff-39823c650639"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 0,
@@ -15786,7 +15792,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 300,
-      "height": 130.39999999999998
+      "height": 177.78
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -15831,13 +15837,15 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "Double click vào tàu để xoay tàu dọc ngang.",
-    "_N$string": "Double click vào tàu để xoay tàu dọc ngang.",
+    "_string": "DOUBLE CLICK VÀO TÀU ĐỂ XOAY TÀU DỌC NGANG.",
+    "_N$string": "DOUBLE CLICK VÀO TÀU ĐỂ XOAY TÀU DỌC NGANG.",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 80,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "61e0147d-2f86-4303-b8ff-39823c650639"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 0,
@@ -16064,7 +16072,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 300,
-      "height": 130.39999999999998
+      "height": 177.78
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -16109,13 +16117,15 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "Đặt tàu đúng cách. Nút Start  sẽ sáng viền gỗ.",
-    "_N$string": "Đặt tàu đúng cách. Nút Start  sẽ sáng viền gỗ.",
+    "_string": "ĐẶT TÀU ĐÚNG CÁCH. NÚT START SẼ SÁNG VIỀN GỖ.",
+    "_N$string": "ĐẶT TÀU ĐÚNG CÁCH. NÚT START SẼ SÁNG VIỀN GỖ.",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 80,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "61e0147d-2f86-4303-b8ff-39823c650639"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 0,
@@ -16286,7 +16296,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "e78d52e1-9b47-4992-ac7a-a754c2e8fe10"
+      "__uuid__": "08c02a8d-2afc-4910-b2d7-83f3ee9e3d71"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -16342,7 +16352,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 300,
-      "height": 130.39999999999998
+      "height": 133.33
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -16387,13 +16397,15 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "Chọn một toạ đồ bắt kì để bắn enemy.",
-    "_N$string": "Chọn một toạ đồ bắt kì để bắn enemy.",
+    "_string": "CHỌN MỘT TOẠ ĐỘ BẤT KÌ ĐỂ BẮN ENEMY.",
+    "_N$string": "CHỌN MỘT TOẠ ĐỘ BẤT KÌ ĐỂ BẮN ENEMY.",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 80,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "61e0147d-2f86-4303-b8ff-39823c650639"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 0,

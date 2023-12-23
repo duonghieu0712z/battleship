@@ -18,6 +18,7 @@ cc.Class({
     },
 
     playClip() {
+        Emitter.instance.emit(EVENT_NAME.SOUND_SHIP_SANK);
         this.shipFailVideo.node.active = true;
         let myanimation = this.shipFailVideo.node.getComponent(cc.Animation);
         myanimation.play(myanimation.getClips()[0].name);
