@@ -15,6 +15,7 @@ cc.Class({
         var _shootWater = this.shootWater.bind(this);
         var _click = this.click.bind(this);
         var _loading = this.loading.bind(this);
+        var _shipSank = this.shipSank.bind(this);
         Emitter.instance.registerEvent(
             EVENT_NAME.SOUND_CANON_SHOOT,
             _canonShoot
@@ -26,6 +27,7 @@ cc.Class({
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_EXPLOSION, _explosion);
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_CLICK, _click);
         Emitter.instance.registerEvent(EVENT_NAME.SOUND_LOADING, _loading);
+        Emitter.instance.registerEvent(EVENT_NAME.SOUND_SHIP_SANK, _shipSank);
     },
 
     start() {
@@ -48,6 +50,10 @@ cc.Class({
 
     click() {
         this.playSound("click");
+    },
+
+    shipSank() {
+        this.playSound("shipSank");
     },
 
     loading() {

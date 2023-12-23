@@ -20,6 +20,7 @@ cc.Class({
 
     playClip() {
         console.log("gfdd");
+        Emitter.instance.emit(EVENT_NAME.SOUND_SHIP_SANK);
         this.shipFailVideo.node.active = true;
         this.shipFailVideo.play();
     },
