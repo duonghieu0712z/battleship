@@ -14,6 +14,11 @@ cc.Class({
         circleLoading: cc.Node,
 
         loadingLabel: cc.Label,
+
+        mapHead: cc.Node,
+
+        miniMapHead: cc.Node,
+
     },
 
     onLoad() {
@@ -27,10 +32,17 @@ cc.Class({
             EVENT_NAME.WAIT_FOR_ENEMY,
             _waitForEnemy
         );
+        this.mapHeadLabel = this.mapHead.getChildByName('Label').getComponent(cc.Label);
+        this.miniMapHeadLabel = this.miniMapHead.getChildByName('Label').getComponent(cc.Label);
+
+        this.mapHeadBackground = this.mapHead.getChildByName('Background');
+        this.miniMapHeadBackground = this.miniMapHead.getChildByName('Background');
     },
 
     start() {
         this.resetPosition();
+        this.mapHead.active = false;
+        this.miniMapHead.active = false;
     },
 
     resetPosition() {
@@ -42,6 +54,8 @@ cc.Class({
     },
 
     yourTurn() {
+        this.mapHead.active = false;
+        this.miniMapHead.active = false;
         this.yourTurnPanel.active = true;
         var action = cc.sequence(
             cc.moveTo(0.5, -20, 0),
@@ -50,6 +64,13 @@ cc.Class({
             cc.callFunc(() => {
                 this.resetPosition();
                 Emitter.instance.emit(EVENT_NAME.YOUR_TURN_PANEL_DONE);
+                this.mapHead.active = true;
+                this.miniMapHead.active = true;
+                this.mapHeadLabel.string = 'YOUR TURN';
+                this.miniMapHeadLabel.string = 'YOUR TURN';
+
+                this.mapHeadBackground.color = new cc.Color(0,0,255);
+                this.miniMapHeadBackground.color = new cc.Color(0,0,255);
             })
         );
         this.yourTurnPanel.runAction(action);
@@ -57,6 +78,8 @@ cc.Class({
 
     enemyTurn() {
         this.enemyTurnPanel.active = true;
+        this.mapHead.active = false;
+        this.miniMapHead.active = false;
         var action = cc.sequence(
             cc.moveTo(0.5, 20, 0),
             cc.moveTo(1, -20, 0),
@@ -64,12 +87,21 @@ cc.Class({
             cc.callFunc(() => {
                 this.resetPosition();
                 Emitter.instance.emit(EVENT_NAME.ENEMY_TURN_PANEL_DONE);
+                this.mapHead.active = true;
+                this.miniMapHead.active = true;
+
+                this.mapHeadLabel.string = `ENEMY'S TURN`;
+                this.miniMapHeadLabel.string = `ENEMY'S TURN`;
+                this.mapHeadBackground.color = new cc.Color(146,123,48);
+                this.miniMapHeadBackground.color = new cc.Color(146,123,48);
             })
         );
         this.enemyTurnPanel.runAction(action);
     },
 
     waitForEnemy() {
+        this.mapHead.active = false;
+        this.miniMapHead.active = false;
         this.circleLoading.parent.active = true;
         var action = cc.sequence(
             cc.spawn(
