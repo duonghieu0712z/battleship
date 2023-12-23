@@ -1,13 +1,13 @@
-const Emitter = require("EventEmitter")
+const Emitter = require("EventEmitter");
 cc.Class({
     extends: cc.Component,
 
     properties: {},
 
     onLoad() {
-        this.mousePos = cc.v2(0,0);
-        // Lắng nghe sự kiện click chuột
-        this.node.on("mousedown",this.onMouseDown,this)
+        this.mousePos = cc.v2(0, 0);
+
+        this.node.on("mousedown", this.onMouseDown, this);
     },
 
     onDestroy() {
@@ -16,7 +16,6 @@ cc.Class({
 
     onMouseDown(event) {
         this.mousePos = event.getLocation();
-        Emitter.instance.emit("takePosition",this.mousePos)
+        Emitter.instance.emit("takePosition", this.mousePos);
     },
-
 });

@@ -1,5 +1,6 @@
 const Emitter = require("EventEmitter");
 const EVENT_NAME = require("NAME_EVENT");
+
 cc.Class({
     extends: cc.Component,
 
@@ -15,9 +16,7 @@ cc.Class({
         yEnd: 280,
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
-    onLoad () {
+    onLoad() {
         var _openWinPanel = this.openWinPanel.bind(this);
         var _openLosePanel = this.openLosePanel.bind(this);
 
@@ -25,7 +24,7 @@ cc.Class({
         Emitter.instance.registerEvent(EVENT_NAME.LOSE, _openLosePanel);
     },
 
-    start () {
+    start() {
         this.winPanel.active = false;
 
         this.losePanel.active = false;
@@ -33,36 +32,32 @@ cc.Class({
         this.loadingScene.active = false;
     },
 
-    // update (dt) {},
-
-    openWinPanel(){
+    openWinPanel() {
         this.winPanel.active = true;
-        this.scheduleOnce(function() {
+        this.scheduleOnce(function () {
             this.loading();
         }, 10);
-    
     },
 
-    openLosePanel(){
+    openLosePanel() {
         this.losePanel.active = true;
-        this.scheduleOnce(function() {
+        this.scheduleOnce(function () {
             this.loading();
         }, 10);
     },
 
-    restart(){
+    restart() {
         cc.director.loadScene("logInScene");
     },
 
     loading() {
         this.loadingScene.active = true;
 
-         cc.tween(this.loadingWaves)
-        .to(5.2, { y: this.yEnd })
-        .call(()=>{
-            this.restart();
-        })
-        .start()
+        cc.tween(this.loadingWaves)
+            .to(5.2, { y: this.yEnd })
+            .call(() => {
+                this.restart();
+            })
+            .start();
     },
-
 });

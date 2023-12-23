@@ -1,4 +1,3 @@
-
 cc.Class({
     extends: cc.Component,
 
@@ -11,52 +10,42 @@ cc.Class({
         pagePool: cc.Node,
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
-    onLoad () {        
+    onLoad() {
         this.pageNodes = this.pagePool.getChildren();
         this.setPage();
     },
 
-    start () {
+    start() {},
 
-    },
-
-    // update (dt) {},
-
-    nextPage(){
+    nextPage() {
         this.pageIndex++;
         this.setPage();
     },
 
-    backPage(){
+    backPage() {
         this.pageIndex--;
         this.setPage();
     },
 
-    setPage(){
+    setPage() {
         this.checkButton();
-        this.pageNodes.forEach(element => {
-            if(element.name === 'Page'+this.pageIndex){
+        this.pageNodes.forEach((element) => {
+            if (element.name === "Page" + this.pageIndex) {
                 element.active = true;
-            }
-            else {
+            } else {
                 element.active = false;
             }
         });
     },
 
-    checkButton(){
-        if(this.pageIndex >= 5){
+    checkButton() {
+        if (this.pageIndex >= 5) {
             this.rightButton.active = false;
-        }
-        else if(this.pageIndex <= 1)
-        {
+        } else if (this.pageIndex <= 1) {
             this.leftButton.active = false;
-        }
-        else{
+        } else {
             this.rightButton.active = true;
             this.leftButton.active = true;
         }
-    }
+    },
 });

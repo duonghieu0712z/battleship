@@ -32,7 +32,7 @@ cc.Class({
             )
         );
 
-        const autoMap = this.getComponent('AutoLoadMap');
+        const autoMap = this.getComponent("AutoLoadMap");
         if (autoMap) {
             autoMap.setMap(this.map);
         }
@@ -40,7 +40,6 @@ cc.Class({
 
     start() {
         this.changeInteractState(true);
-        // this.map[0][0].getComponent("Tile").isShooted = true;
     },
 
     onTouchEnd(event) {
@@ -49,20 +48,22 @@ cc.Class({
         let touchPosLocal = this.node.convertToNodeSpaceAR(touchPosGlobal);
         this.convertPosition(touchPosLocal);
     },
+
     onMouseEnter(event) {
         this.clearHover();
-        // console.log('Mouse entered!');
+
         this.hoverAction(event);
     },
-    onMouseMove(event){
-        // console.log('Mouse move!');
-       this.hoverAction(event);
+
+    onMouseMove(event) {
+        this.hoverAction(event);
     },
+
     onMouseLeave(event) {
-        // console.log('Mouse left!');
-       this.clearHover();
+        this.clearHover();
     },
-    hoverAction(event){
+
+    hoverAction(event) {
         this.clearHover();
         let touchPosGlobal = event.getLocation();
         let touchPosLocal = this.node.convertToNodeSpaceAR(touchPosGlobal);
@@ -70,25 +71,37 @@ cc.Class({
         let posY = touchPosLocal.y + 30;
         let stepX = Math.round(posX / 55);
         let stepY = Math.round(posY / 55);
-        if (stepY*-1 < 0 ||stepY*-1 >= this.cols || stepX < 0 ||stepX >=  this.rows) {
+        if (
+            stepY * -1 < 0 ||
+            stepY * -1 >= this.cols ||
+            stepX < 0 ||
+            stepX >= this.rows
+        ) {
             return;
         }
         let tile = this.map[stepY * -1][stepX];
         tile.getComponent("Tile").setHover(true);
     },
-    clearHover(){
-        this.map.forEach(rows => {
-            rows.forEach(element=>{
+
+    clearHover() {
+        this.map.forEach((rows) => {
+            rows.forEach((element) => {
                 element.getComponent("Tile").setHover(false);
-            })
+            });
         });
     },
+
     convertPosition(pos) {
         let posX = pos.x - 30;
         let posY = pos.y + 30;
         let stepX = Math.round(posX / 55);
         let stepY = Math.round(posY / 55);
-        if (stepY*-1 < 0 ||stepY*-1 >= this.cols || stepX < 0 ||stepX >=  this.rows) {
+        if (
+            stepY * -1 < 0 ||
+            stepY * -1 >= this.cols ||
+            stepX < 0 ||
+            stepX >= this.rows
+        ) {
             return;
         }
         let tile = this.map[stepY * -1][stepX];
@@ -101,13 +114,6 @@ cc.Class({
     },
 
     test() {
-        // for (let i = 0; i < 4; i++) {
-        //     let a = new Ship(4, true);
-        //     let x=this.getRandomIntegerInRange(0,8);
-        //     let y=this.getRandomIntegerInRange(0,8);
-        //     a.calculatePosition(x, y,false);
-        //     this.setShip({arrayPos:a.positions,shipId:a.shipId});
-        // }
         this.node.active = !this.node.active;
     },
 
@@ -145,17 +151,34 @@ cc.Class({
                 .start();
         }
     },
+
     changeInteractState(isInteract) {
         if (isInteract) {
             this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-            this.node.on(cc.Node.EventType.MOUSE_ENTER, this.onMouseEnter, this);
-            this.node.on(cc.Node.EventType.MOUSE_MOVE, this.onMouseMove,this);
-            this.node.on(cc.Node.EventType.MOUSE_LEAVE, this.onMouseLeave, this);
+            this.node.on(
+                cc.Node.EventType.MOUSE_ENTER,
+                this.onMouseEnter,
+                this
+            );
+            this.node.on(cc.Node.EventType.MOUSE_MOVE, this.onMouseMove, this);
+            this.node.on(
+                cc.Node.EventType.MOUSE_LEAVE,
+                this.onMouseLeave,
+                this
+            );
         } else {
             this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-            this.node.off(cc.Node.EventType.MOUSE_ENTER, this.onMouseEnter, this);
-            this.node.off(cc.Node.EventType.MOUSE_MOVE, this.onMouseMove,this);
-            this.node.off(cc.Node.EventType.MOUSE_LEAVE, this.onMouseLeave, this);
+            this.node.off(
+                cc.Node.EventType.MOUSE_ENTER,
+                this.onMouseEnter,
+                this
+            );
+            this.node.off(cc.Node.EventType.MOUSE_MOVE, this.onMouseMove, this);
+            this.node.off(
+                cc.Node.EventType.MOUSE_LEAVE,
+                this.onMouseLeave,
+                this
+            );
         }
-    }
+    },
 });
