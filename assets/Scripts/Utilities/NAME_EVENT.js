@@ -36,6 +36,11 @@ const eventName = {
 
     WIN: "WIN",
     LOSE: "LOSE",
+
+    CHECK_SHIP_IN_CONTAINER: "checkShipInContainer",
+    RECEIVE_RESULT: "receiveresult",
+
+    RANDOM_SHIPS: "random-ships",
 };
 
 module.exports = eventName;

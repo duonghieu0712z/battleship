@@ -2,6 +2,7 @@ const Ship = require("Ship");
 
 const { randomPosition } = require("rands");
 const Emitter = require("EventEmitter");
+const EventName = require("NAME_EVENT");
 
 cc.Class({
     extends: cc.Component,
@@ -14,7 +15,7 @@ cc.Class({
 
     onLoad() {
         const onRandomShips = this.onRandomShips.bind(this);
-        Emitter.instance.registerOnce("random-ships", onRandomShips);
+        Emitter.instance.registerOnce(EventName.RANDOM_SHIPS, onRandomShips);
     },
 
     onRandomShips() {

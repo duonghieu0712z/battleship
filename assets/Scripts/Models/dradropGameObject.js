@@ -1,4 +1,5 @@
 const Emitter = require("EventEmitter");
+const EventName = require("NAME_EVENT");
 
 cc.Class({
     extends: cc.Component,
@@ -122,7 +123,7 @@ cc.Class({
                     positions: this.node.getComponent("Ship").positions,
                     shipId: this.node.getComponent("Ship").shipId,
                 });
-                Emitter.instance.emit("checkShipInContainer");
+                Emitter.instance.emit(EventName.CHECK_SHIP_IN_CONTAINER);
             }
         }
     },
@@ -153,7 +154,7 @@ cc.Class({
                 shipId: this.node.getComponent("Ship").shipId,
             });
         }
-        Emitter.instance.emit("checkShipInContainer");
+        Emitter.instance.emit(EventName.CHECK_SHIP_IN_CONTAINER);
         Emitter.instance.emit(
             "checkAvailableAll",
             this.node.getComponent("Ship").shipId

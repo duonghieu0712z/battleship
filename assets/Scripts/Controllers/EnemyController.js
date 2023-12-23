@@ -36,14 +36,14 @@ cc.Class({
         Emitter.instance.registerEvent(EVENT_NAME.HIT_SHIP, onHitShip);
 
         Emitter.instance.registerEvent(
-            "receiveresult",
+            EVENT_NAME.RECEIVE_RESULT,
             this.responeResult.bind(this)
         );
     },
 
     start() {
         Emitter.instance.emit("setEnemyId", this.enemyId);
-        Emitter.instance.emit("random-ships");
+        Emitter.instance.emit(EVENT_NAME.RANDOM_SHIPS);
         Emitter.instance.emit("log-enemy-map");
     },
 

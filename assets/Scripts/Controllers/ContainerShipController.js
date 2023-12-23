@@ -1,4 +1,5 @@
 const Emitter = require("EventEmitter");
+const EventName = require("NAME_EVENT");
 
 cc.Class({
     extends: cc.Component,
@@ -15,7 +16,7 @@ cc.Class({
     start() {
         this.startButton.interactable = false;
         Emitter.instance.registerEvent(
-            "checkShipInContainer",
+            EventName.CHECK_SHIP_IN_CONTAINER,
             this.checkShipInContainer.bind(this)
         );
     },
