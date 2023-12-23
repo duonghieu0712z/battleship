@@ -1977,8 +1977,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "100%",
-    "_N$string": "100%",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 45,
     "_lineHeight": 40,
     "_enableWrapText": true,
