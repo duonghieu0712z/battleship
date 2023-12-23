@@ -67,7 +67,7 @@ cc.Class({
                 this.mapHead.active = true;
                 this.miniMapHead.active = true;
                 this.mapHeadLabel.string = 'YOUR TURN';
-                this.miniMapHeadLabel.string = 'YOUR TURN';
+                this.miniMapHeadLabel.string = 'YOUR FLEET';
 
                 this.mapHeadBackground.color = new cc.Color(0,0,255);
                 this.miniMapHeadBackground.color = new cc.Color(0,0,255);
@@ -91,7 +91,7 @@ cc.Class({
                 this.miniMapHead.active = true;
 
                 this.mapHeadLabel.string = `ENEMY'S TURN`;
-                this.miniMapHeadLabel.string = `ENEMY'S TURN`;
+                this.miniMapHeadLabel.string = `ENEMY'S FLEET`;
                 this.mapHeadBackground.color = new cc.Color(146,123,48);
                 this.miniMapHeadBackground.color = new cc.Color(146,123,48);
             })
