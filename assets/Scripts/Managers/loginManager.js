@@ -14,8 +14,6 @@ cc.Class({
 
         yEnd: 280,
 
-        speed: 100,
-
         percentLabel: cc.Label,
     },
 
@@ -27,7 +25,7 @@ cc.Class({
     },
 
     update(dt) {
-        this.setPercentLabel(Math.floor(percent.value));
+
     },
 
     setPercentLabel(percent) {
@@ -37,29 +35,20 @@ cc.Class({
     loading() {
         this.loginScene.active = false;
         this.loadingScene.active = true;
-
-        cc.tween(percent)
-            .delay(0.5)
-            .to(0.5, { value: 20 })
-            .delay(0.5)
-            .call(() => {
-                this.loadMainScene();
-            })
-            .to(0.4, { value: 30 })
-            .delay(0.4)
-            .to(0.3, { value: 60 })
-            .delay(0.3)
-            .to(0.3, { value: 65 })
-            .delay(0.3)
-            .to(0.2, { value: 90 })
-            .delay(0.2)
-            .to(1, { value: 100 })
-            .start();
-
-        cc.tween(this.loadingWaves).to(5.2, { y: this.yEnd }).start();
+        this.loadGameAssets();
     },
 
-    loadMainScene() {
-        cc.director.loadScene("mainScene");
+    loadGameAssets() {
+        cc.tween(this.loadingWaves).to(2, { y: this.yEnd - 20 }).start();
+        cc.director.preloadScene("mainScene", (completedCount, totalCount, item) => {
+            var progress = (completedCount / totalCount)*100;
+            this.percentLabel.string = progress.toFixed()+`%`;
+        }, (error) => {
+            if (!error) {
+                cc.director.loadScene("mainScene");
+            } else {
+                console.error(error);
+            }
+        });
     },
 });
