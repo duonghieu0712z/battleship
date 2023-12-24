@@ -74,7 +74,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "\bOcean",
+    "_name": "Ocean",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -170,7 +170,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6518c8fa-286d-48de-a14c-0f63a6c7f006"
     },
     "fileId": "cc6RlCOJZNR7jb1U/+sUCU",
     "sync": false
@@ -273,7 +273,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6518c8fa-286d-48de-a14c-0f63a6c7f006"
     },
     "fileId": "c6+0v4Qg9FfqIu7USeN1bf",
     "sync": false
@@ -284,7 +284,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "6518c8fa-286d-48de-a14c-0f63a6c7f006"
     },
     "fileId": "14HIbgwZ5OH6q4SGb2YVYC",
     "sync": false
